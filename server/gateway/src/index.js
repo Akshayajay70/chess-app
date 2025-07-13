@@ -20,9 +20,25 @@ app.use(cors({
 
 app.use(morgan('combined'));
 
-app.use('/user', verifyToken, createProxyMiddleware({
+app.use('/auth', createProxyMiddleware({
     target: 'http://localhost:8001',
     changeOrigin: true
 }));
+
+app.use('/user', verifyToken('user'), createProxyMiddleware({
+    target: 'http://localhost:8001',
+    changeOrigin: true
+}));
+
+app.use('/admin/login', createProxyMiddleware({
+    target: 'http://localhost:8002',
+    changeOrigin: true
+}));
+
+app.use('/admin', verifyToken('admin'), createProxyMiddleware({
+    target: 'http://localhost:8002',
+    changeOrigin: true
+}));
+
 
 app.listen(PORT, () => console.log(`Gateway is running on Port: ${PORT}`));
