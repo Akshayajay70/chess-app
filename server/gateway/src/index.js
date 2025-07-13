@@ -3,6 +3,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { config } from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
+import { verifyToken } from './verifyToken.js';
 
 config();
 
@@ -15,12 +16,13 @@ app.use(cors({
     origin: URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization']
-}))
+}));
+
 app.use(morgan('combined'));
 
-app.use('/user', createProxyMiddleware({
+app.use('/user', verifyToken, createProxyMiddleware({
     target: 'http://localhost:8001',
     changeOrigin: true
-}))
+}));
 
 app.listen(PORT, () => console.log(`Gateway is running on Port: ${PORT}`));
