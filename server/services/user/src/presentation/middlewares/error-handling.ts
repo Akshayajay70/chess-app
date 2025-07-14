@@ -55,6 +55,11 @@ export const errorHandlingMiddleware = (
             message = err.message || message;
         }
     }
+    console.error('Error 💥:', {
+        statusCode,
+        message: err.message,
+        stack: err.stack
+    });
 
     res.status(statusCode).json({
         error: message,

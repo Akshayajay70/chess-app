@@ -19,6 +19,9 @@ export class UpdateNameUseCase implements IUpdateNameUseCase {
             if (!user) return { success: false };
             if (user.name !== "guest") return { success: false };
 
+            const result = await this.userRepo.updateName(email, newName);
+            if (!result) return { success: false };
+
             const accessToken = this.tokenService.generateAccessToken({
                 email,
                 gameId: user.gameId,

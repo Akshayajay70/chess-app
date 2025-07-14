@@ -36,7 +36,7 @@ export class RefreshTokenUseCase implements IRefreshTokenUseCase{
             throw new UseCaseError("No valid token provided", new TokenError("Missing or invalid token"));
         } catch (error) {
             throw new UseCaseError(
-                "Failed to refresh token",
+                "Failed to create refresh token",
                 error instanceof Error ? error : new Error("Unknown error")
             );
         }

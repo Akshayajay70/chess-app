@@ -8,7 +8,7 @@ import { verifyToken } from './verifyToken.js';
 config();
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = 8000;
 const URL = process.env.FRONTEND_URL;
 
 app.use(cors({
@@ -20,23 +20,24 @@ app.use(cors({
 
 app.use(morgan('combined'));
 
-app.use('/auth', createProxyMiddleware({
-    target: 'http://localhost:8001',
+app.use('/user', verifyToken('user'), createProxyMiddleware({
+    target: 'http://localhost:8001/user',
     changeOrigin: true
 }));
 
-app.use('/user', verifyToken('user'), createProxyMiddleware({
-    target: 'http://localhost:8001',
-    changeOrigin: true
+app.use('/auth', createProxyMiddleware({
+    target: 'http://localhost:8001/auth',
+    changeOrigin: true,
+    pathRewrite: { '^/auth': '/auth' },
 }));
 
 app.use('/admin/login', createProxyMiddleware({
-    target: 'http://localhost:8002',
+    target: 'http://localhost:8002/admin',
     changeOrigin: true
 }));
 
 app.use('/admin', verifyToken('admin'), createProxyMiddleware({
-    target: 'http://localhost:8002',
+    target: 'http://localhost:8002/admin',
     changeOrigin: true
 }));
 

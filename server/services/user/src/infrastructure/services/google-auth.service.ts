@@ -3,7 +3,7 @@ import { IGoogleAuthService } from '../../application/interfaces/google-auth.int
 import { GoogleIdentityDTO } from '../../application/dto/google-identity';
 import { GoogleAuthDTO } from '../../application/dto/google-auth';
 import { config } from '../../config';
-import { GoogleAuthError } from '@/domain/errors/google-auth.error';
+import { GoogleAuthError } from '../../domain/errors/google-auth.error';
 
 export class GoogleAuthService implements IGoogleAuthService {
     private readonly oauth2Client: OAuth2Client;

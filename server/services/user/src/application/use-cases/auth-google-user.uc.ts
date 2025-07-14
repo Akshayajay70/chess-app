@@ -17,7 +17,6 @@ export class AuthGoogleUserUseCase implements IAuthGoogleUserUseCase {
         try {
             const { idToken } = await this.googleService.getGoogleTokensFromCode(code);
             const { email, googleId } = await this.googleService.verifyGoogleToken(idToken);
-
             let user = await this.userRepo.findByEmail(email);
             if (user) {
                 const accessToken = this.tokenService.generateAccessToken({
@@ -43,7 +42,6 @@ export class AuthGoogleUserUseCase implements IAuthGoogleUserUseCase {
             while (await this.userRepo.findByGameId(gameId)) {
                 gameId = GameId.generate().getValue();
             }
-
             const userEntity = UserEntity.create(
                 gameId,
                 googleId,
@@ -51,7 +49,6 @@ export class AuthGoogleUserUseCase implements IAuthGoogleUserUseCase {
                 email,
                 "active"
             );
-
             user = await this.userRepo.create(userEntity);
 
             return {

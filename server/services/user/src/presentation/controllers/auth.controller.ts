@@ -4,6 +4,7 @@ import { UpdateNameUseCase } from "../../application/use-cases/update-name.uc";
 import { config } from "../../config";
 import { IGoogleAuthService } from "../../application/interfaces/google-auth.interface";
 import { RefreshTokenUseCase } from "../../application/use-cases/refresh-token.uc";
+import { TokenError } from "@/domain/errors/token.error";
 
 export class AuthController {
     constructor(
@@ -51,7 +52,7 @@ export class AuthController {
 
     async setName(req: Request, res: Response, next: NextFunction) {
         try {
-            const { email, newName } = req.body;
+            const { email, name: newName } = req.body;
 
             const result = await this.updateNameUseCase.execute({ email, newName });
 
@@ -77,6 +78,9 @@ export class AuthController {
         try {
             const accessToken = req.headers.authorization?.split(" ")[1];
             const refreshToken = req.cookies.refreshToken;
+
+            if(!accessToken) throw new TokenError('No access token provided');
+            if(!refreshToken) throw new TokenError('No refresh token provided');
 
             const result = this.refreshTokenUseCase.execute({ accessToken, refreshToken });
 

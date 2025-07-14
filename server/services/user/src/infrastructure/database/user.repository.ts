@@ -1,9 +1,9 @@
-import { UserResponse } from "@/application/dto/user-response";
+import { UserResponse } from "../../application/dto/user-response";
 import { IUserRespository } from "../../application/interfaces/user-repo.interface";
-import { UserEntity } from "@/domain/entities/user.entitie";
+import { UserEntity } from "../../domain/entities/user.entitie";
 import { UserMapper } from "../mapper/user-mapper";
 import { UserModel } from "./user.model";
-import { DatabaseError } from "@/domain/errors/database.error";
+import { DatabaseError } from "../../domain/errors/database.error";
 
 export class UserRepository implements IUserRespository {
     async create(user: UserEntity): Promise<UserResponse> {
@@ -27,8 +27,7 @@ export class UserRepository implements IUserRespository {
     async findByEmail(email: string): Promise<UserResponse | null> {
         try {
             const user = await UserModel.find({ email });
-
-            return user ? UserMapper.toDomain({
+            return user.length ? UserMapper.toDomain({
                 ...user[0].toObject(),
                 _id: user[0]._id.toString()
             }) : null
@@ -44,8 +43,7 @@ export class UserRepository implements IUserRespository {
     async findByGameId(gameId: string): Promise<UserResponse | null> {
         try {
             const user = await UserModel.find({ gameId });
-
-            return user ? UserMapper.toDomain({
+            return user.length ? UserMapper.toDomain({
                 ...user[0].toObject(),
                 _id: user[0]._id.toString()
             }) : null
