@@ -29,7 +29,24 @@ export class AuthController {
             const result = await this.authGoogleUseCase.execute(code);
 
             if (result.newUser) {
-                return res.status(200).json({ newUser: true, user: result.user });
+                return res.send(`
+                    <html>
+                        <body>
+                            <script>
+                                (function() {
+                                    if (window.opener) {
+                                        window.opener.postMessage({
+                                        type: 'AUTH_SUCCESS',
+                                        newUser: ${result.newUser},
+                                        user: ${result.user}
+                                        }, '${config.frontendUrl}');
+                                    }
+                                    window.close();
+                                })();
+                            </script>
+                        </body>
+                    </html>
+                `);
             }
 
             res.cookie("refreshToken", result.refreshToken, {
@@ -40,11 +57,25 @@ export class AuthController {
                 maxAge: 7 * 24 * 60 * 60 * 1000,
             });
 
-            return res.status(200).json({
-                newUser: false,
-                accessToken: result.accessToken,
-                user: result.user
-            });
+            return res.send(`
+                    <html>
+                        <body>
+                            <script>
+                                (function() {
+                                    if (window.opener) {
+                                        window.opener.postMessage({
+                                        type: 'AUTH_SUCCESS',
+                                        newUser: ${result.newUser},
+                                        accessToken: ${result.accessToken}
+                                        user: ${result.user}
+                                        }, '${config.frontendUrl}');
+                                    }
+                                    window.close();
+                                })();
+                            </script>
+                        </body>
+                    </html>
+                `);
         } catch (error) {
             next(error);
         }
@@ -79,8 +110,8 @@ export class AuthController {
             const accessToken = req.headers.authorization?.split(" ")[1];
             const refreshToken = req.cookies.refreshToken;
 
-            if(!accessToken) throw new TokenError('No access token provided');
-            if(!refreshToken) throw new TokenError('No refresh token provided');
+            if (!accessToken) throw new TokenError('No access token provided');
+            if (!refreshToken) throw new TokenError('No refresh token provided');
 
             const result = this.refreshTokenUseCase.execute({ accessToken, refreshToken });
 

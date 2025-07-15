@@ -12,6 +12,7 @@ type AppConfig = {
     jwtSecretRefresh: string;
     jwtAccessExp: number;
     jwtRefreshExp: number;
+    frontendUrl: string;
 }
 
 export const config: AppConfig = {
@@ -24,4 +25,5 @@ export const config: AppConfig = {
     jwtSecretRefresh: process.env.JWT_REFRESH_SECRET as string,
     jwtAccessExp: Number(process.env.JWT_ACCESS_EXP),
     jwtRefreshExp: Number(process.env.JWT_REFRESH_EXP),
+    frontendUrl: process.env.FRONTEND_URL as string
 }
