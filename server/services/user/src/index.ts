@@ -11,6 +11,7 @@ import { RefreshTokenUseCase } from "./application/use-cases/refresh-token.uc";
 import { GetUserUseCase } from './application/use-cases/get-user.uc';
 import { GoogleAuthService } from "./infrastructure/services/google-auth.service";
 import { JwtService } from "./infrastructure/services/jwt-token.service";
+import { KafkaEventPublisher } from './infrastructure/services/kafka/kafka-event-publisher';
 import { UserRepository } from "./infrastructure/database/user.repository";
 import { AuthController } from './presentation/controllers/auth.controller';
 import { UserController } from './presentation/controllers/user.controller';
@@ -23,11 +24,12 @@ import { createAuthRoutes } from './presentation/routes/auth.routes';
 const userRepo = new UserRepository();
 const googleService = new GoogleAuthService();
 const jwtService = new JwtService();
+const publisher = new KafkaEventPublisher();
 
 const getUserUC = new GetUserUseCase(userRepo);
 const userController = new UserController(getUserUC);
 
-const authGoogleUC = new AuthGoogleUserUseCase(googleService, userRepo, jwtService);
+const authGoogleUC = new AuthGoogleUserUseCase(googleService, userRepo, jwtService, publisher);
 const updateNameUC = new UpdateNameUseCase(userRepo, jwtService);
 const refreshTokenUC = new RefreshTokenUseCase(jwtService);
 

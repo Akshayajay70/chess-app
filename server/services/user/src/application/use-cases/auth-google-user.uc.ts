@@ -5,12 +5,14 @@ import { IUserRespository } from "../interfaces/user-repo.interface";
 import { UserEntity } from "../../domain/entities/user.entitie";
 import { UseCaseError } from "../../domain/errors/use-case.error";
 import { ITokenService } from "../interfaces/token-service.interface";
+import { IEventPublisher } from "../interfaces/event-publisher.interface";
 
 export class AuthGoogleUserUseCase implements IAuthGoogleUserUseCase {
     constructor(
         private readonly googleService: IGoogleAuthService,
         private readonly userRepo: IUserRespository,
-        private readonly tokenService: ITokenService
+        private readonly tokenService: ITokenService,
+        private readonly eventPublisher: IEventPublisher
     ) { }
 
     async execute(code: string): Promise<IAuthGoogleUCOutput> {
@@ -36,6 +38,8 @@ export class AuthGoogleUserUseCase implements IAuthGoogleUserUseCase {
                 );
 
                 user = await this.userRepo.create(userEntity);
+                await this.eventPublisher.publish("user.created", user)
+
             }
 
             const accessToken = this.tokenService.generateAccessToken({
