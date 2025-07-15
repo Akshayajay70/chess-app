@@ -10,6 +10,8 @@ type AppConfig = {
     jwtAccessExp: number;
     frontendUrl: string;
     kafkaUrl: string;
+    adminUsername: string;
+    adminPassword: string;
 }
 
 export const config: AppConfig = {
@@ -19,5 +21,7 @@ export const config: AppConfig = {
     jwtSecretAccess: process.env.JWT_ACCESS_SECRET as string,
     jwtAccessExp: Number(process.env.JWT_ACCESS_EXP),
     frontendUrl: process.env.FRONTEND_URL as string,
-    kafkaUrl: process.env.KAFKA_URL as string
+    kafkaUrl: process.env.KAFKA_URL as string,
+    adminUsername: process.env.ADMIN_USERNAME as string,
+    adminPassword: process.env.ADMIN_PASSWORD as string,
 }
