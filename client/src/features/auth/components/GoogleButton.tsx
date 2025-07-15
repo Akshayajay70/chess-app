@@ -1,6 +1,5 @@
-import type { RootState } from "../../../redux/store";
-import { useAppSelector } from "../../../redux/hooks";
-
+import type { RootState } from "../../../app/redux/store";
+import { useAppSelector } from "../../../app/redux/hooks";
 export interface GoogleButtonProps {
     handleClick: () => void
 }
