@@ -8,7 +8,7 @@ export function Navbar() {
         <div className="flex items-center space-x-2">
           <Logo className="w-48 h-12" />
         </div>
-        <Link to={'#'} className="bg-white/10 hover:bg-white/20 px-6 py-2 rounded-full transition-all duration-200">
+        <Link to={'/auth/login'} className="bg-white/10 hover:bg-white/20 px-6 py-2 rounded-full transition-all duration-200">
           Login
         </Link >
       </div>
