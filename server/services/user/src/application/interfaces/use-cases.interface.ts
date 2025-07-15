@@ -12,7 +12,6 @@ export interface RefreshTokenOutput {
 
 export type IAuthGoogleUCOutput = {
     user: UserResponse,
-    newUser: boolean,
     accessToken?: string,
     refreshToken?: string
 }

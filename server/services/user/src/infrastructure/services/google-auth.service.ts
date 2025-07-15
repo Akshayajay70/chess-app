@@ -74,8 +74,13 @@ export class GoogleAuthService implements IGoogleAuthService {
                 throw new GoogleAuthError('ID_TOKEN_INVALID', 'Invalid Google ID token');
             }
 
+            const name = payload.family_name
+                ? `${payload.given_name} ${payload.family_name}`
+                : payload.given_name
+
             return {
                 email: payload.email!,
+                name: name!,
                 googleId: payload.sub
             };
         } catch (error) {

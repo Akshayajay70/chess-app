@@ -28,27 +28,6 @@ export class AuthController {
 
             const result = await this.authGoogleUseCase.execute(code);
 
-            if (result.newUser) {
-                return res.send(`
-                    <html>
-                        <body>
-                            <script>
-                                (function() {
-                                    if (window.opener) {
-                                        window.opener.postMessage({
-                                        type: 'AUTH_SUCCESS',
-                                        newUser: ${result.newUser},
-                                        user: ${result.user}
-                                        }, '${config.frontendUrl}');
-                                    }
-                                    window.close();
-                                })();
-                            </script>
-                        </body>
-                    </html>
-                `);
-            }
-
             res.cookie("refreshToken", result.refreshToken, {
                 httpOnly: true,
                 secure: config.nodeEnv === "production",
@@ -65,9 +44,8 @@ export class AuthController {
                                     if (window.opener) {
                                         window.opener.postMessage({
                                         type: 'AUTH_SUCCESS',
-                                        newUser: ${result.newUser},
-                                        accessToken: ${result.accessToken}
-                                        user: ${result.user}
+                                        accessToken: "${result.accessToken}",
+                                        user: '${JSON.stringify(result.user)}'
                                         }, '${config.frontendUrl}');
                                     }
                                     window.close();

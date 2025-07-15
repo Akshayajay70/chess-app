@@ -21,7 +21,7 @@ export class Name {
             typeof name === 'string' &&
             name.trim().length >= 3 &&
             name.trim().length <= 20 &&
-            /^[A-Za-z\s'-]+$/.test(name)
+            /^[A-Za-z0-9\s'-]+$/.test(name)
         );
     }
 }
