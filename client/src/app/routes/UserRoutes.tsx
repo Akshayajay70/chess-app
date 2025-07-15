@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { GoogleAuthPage } from "../../features/auth/pages/GoogleAuthPage"
 import { LandingPage } from "../../features/landing/pages/LandingPage"
 import { PublicRoutes } from "./PublicRoutes"
+import { ProtectedRoutes } from "./ProtectedRoutes"
+import { HomePage } from "../../features/home/HomePage"
 
 const router = createBrowserRouter([
     {
@@ -9,6 +11,13 @@ const router = createBrowserRouter([
         element: <PublicRoutes />,
         children: [
             { index: true, element: <LandingPage /> }
+        ]
+    },
+    {
+        path: '/user/home',
+        element: <ProtectedRoutes />,
+        children: [
+            { index: true, element: <HomePage /> }
         ]
     },
     {
@@ -27,7 +36,8 @@ const router = createBrowserRouter([
                 children: [
                     { index: true, element: <GoogleAuthPage mode="signin" /> }
                 ]
-            }
+            },
+
         ]
     }
 ])

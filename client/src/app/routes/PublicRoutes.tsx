@@ -11,7 +11,7 @@ export function PublicRoutes() {
         if (token) {
             const timer = setTimeout(() => {
                 setShouldRedirect(true);
-            }, 3000);
+            }, 1000);
 
             return () => clearTimeout(timer);
         }
@@ -19,7 +19,7 @@ export function PublicRoutes() {
 
     if (token && !shouldRedirect) return <AuthSpinner />;
 
-    if (token && shouldRedirect) return <Navigate to={'/'} replace />;
+    if (token && shouldRedirect) return <Navigate to={'/user/home'} replace />;
 
     return <Outlet />;
 }
