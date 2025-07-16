@@ -22,7 +22,7 @@ export function AdminSidebar({ onLogout }: AdminSidebarProps) {
             ),
         },
         {
-            path: '/admin/users',
+            path: '/admin/user',
             label: 'User Management',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

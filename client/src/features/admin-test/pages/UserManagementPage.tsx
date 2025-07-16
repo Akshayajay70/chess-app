@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { UserTable } from '../components/UserTable';
-import type { UserTableSortField, UserTableSortDirection } from '../components/UserTable';
+import type { UserTableSortField } from '../components/UserTable';
 import { SearchBar } from '../components/SearchBar';
 import { Pagination } from '../components/Pagination';
 import type { FilterTypes } from '../redux/userMan.slice';

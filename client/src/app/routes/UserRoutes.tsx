@@ -6,6 +6,14 @@ import { ProtectedRoutes } from "./ProtectedRoutes"
 import { HomePage } from "../../features/home/HomePage"
 import { AdminLoginPage } from "../../features/admin-test/pages/AuthPage"
 import { UserManagementPage } from "../../features/admin-test/pages/UserManagementPage"
+import { Navigate, Outlet } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks";
+import type { RootState } from "../redux/store";
+
+function AdminProtectedRoutes() {
+    const isAuthenticated = useAppSelector((state: RootState) => state.adminAuth.isAuthenticated);
+    return isAuthenticated ? <Outlet /> : <Navigate to={'/admin/login'} replace />;
+}
 
 const router = createBrowserRouter([
     {
@@ -48,7 +56,10 @@ const router = createBrowserRouter([
     },
     {
         path: '/admin/user',
-        element: <UserManagementPage />
+        element: <AdminProtectedRoutes />, // protect admin route
+        children: [
+            { index: true, element: <UserManagementPage /> }
+        ]
     }
 ])
 
