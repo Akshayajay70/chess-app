@@ -10,7 +10,7 @@ export interface ISearchUserUseCase {
         search: string,
         page: number,
         limit: number,
-        sortType: "asc" | "desc",
+        sortType: 1 | -1,
         sortDes: string
     ): Promise<SearchResponse>;
 }

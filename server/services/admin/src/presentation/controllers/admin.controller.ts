@@ -20,12 +20,13 @@ export class AdminController {
 
     async searchUsers(req: Request, res: Response, next: NextFunction) {
         try {
-            const { search = "", page = 1, limit = 50, sortType = "asc", sortDes = "createdAt" } = req.query;
+            const { search = "", page = 1, limit = 50, sortType = 1, sortDes = "name" } = req.query;
+            const sort = Number(sortType) === 1 ? 1 : -1
             const result = await this.searchUserUseCase.execute(
                 String(search),
                 Number(page),
                 Number(limit),
-                sortType === "desc" ? "desc" : "asc",
+                sort,
                 String(sortDes)
             );
             return res.status(200).json(result);

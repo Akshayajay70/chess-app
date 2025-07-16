@@ -16,9 +16,10 @@ type Credentials = {
 };
 
 // --- Initial State ---
+const token = authUtils.getToken();
 const initialState: AdminAuthState = {
-    isAuthenticated: false,
-    adminAccessToken: null,
+    isAuthenticated: !!token,
+    adminAccessToken: token,
     loading: false,
     error: undefined
 };

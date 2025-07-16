@@ -11,16 +11,15 @@ export class SearchUsersUseCase implements ISearchUserUseCase {
         search: string,
         page: number,
         limit: number,
-        sortType: "asc" | "desc",
+        sortType: 1 | -1,
         sortDes: string
     ): Promise<SearchResponse> {
         try {
-            const sort = sortType === "asc" ? 1 : -1;
             const response = await this.adminRepo.search(
                 search,
                 page,
                 limit,
-                sort,
+                sortType,
                 sortDes
             )
             return response

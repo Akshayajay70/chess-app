@@ -1,4 +1,3 @@
-import { Password, Username } from "@/domain/value-objects/index";
 import { ILoginUseCase } from "../interfaces/use-case.interface";
 import { config } from "../../config/index";
 import { ITokenService } from "../interfaces/token.interface";
@@ -11,21 +10,20 @@ export class LoginUseCase implements ILoginUseCase {
 
     async execute(username: string, password: string): Promise<{ success: boolean, message: string, accessToken?: string; }> {
         try {
-            const validatedUsername = Username.create(username).getValue();
-            const validatedPassword = Password.create(password).getValue();
             const { adminUsername, adminPassword } = config
-            if (validatedUsername !== adminUsername && validatedPassword !== adminPassword) {
+            console.log(username, password)
+            if (username === adminUsername && password === adminPassword) {
+                const accessToken = this.tokenService.generateAccessToken({ role: 'admin' });
+
                 return {
-                    success: false,
-                    message: 'Invalid credentials',
+                    success: true,
+                    message: "Admin verified successfully",
+                    accessToken: accessToken
                 }
             }
-            const accessToken = this.tokenService.generateAccessToken({ role: 'admin' });
-
             return {
-                success: true,
-                message: "Admin verified successfully",
-                accessToken: accessToken
+                success: false,
+                message: 'Invalid credentials',
             }
         } catch (error) {
             throw new UseCaseError(
