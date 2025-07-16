@@ -4,6 +4,8 @@ import { LandingPage } from "../../features/landing/pages/LandingPage"
 import { PublicRoutes } from "./PublicRoutes"
 import { ProtectedRoutes } from "./ProtectedRoutes"
 import { HomePage } from "../../features/home/HomePage"
+import { AdminLoginPage } from "../../features/admin-test/pages/AuthPage"
+import { UserManagementPage } from "../../features/admin-test/pages/UserManagementPage"
 
 const router = createBrowserRouter([
     {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
             },
 
         ]
+    },
+    {
+        path: '/admin/login',
+        element: <AdminLoginPage />
+    },
+    {
+        path: '/admin/user',
+        element: <UserManagementPage />
     }
 ])
 
