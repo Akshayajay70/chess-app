@@ -13,6 +13,7 @@ import { SaveUserUseCase } from "./application/use-cases/save-user.uc";
 import { AdminController } from "./presentation/controllers/admin.controller";
 import { createAdminRoutes } from "./presentation/routes/admin.routes";
 import { JwtService } from "./infrastructure/services/jwt.service";
+import { KafkaUserStatusUpdate } from './infrastructure/services/kafka.service';
 
 const { port: PORT } = config;
 
@@ -24,11 +25,12 @@ app.use(express.urlencoded());
 // --- Setup Dependencies ---
 const adminRepo = new AdminRepository();
 const kafkaListener = new KafkaUserCreatedListener();
+const publisher = new KafkaUserStatusUpdate()
 
 const jwtService = new JwtService();
 const loginUC = new LoginUseCase(jwtService);
 const searchUsersUC = new SearchUsersUseCase(adminRepo);
-const updateStatusUC = new UpdateStatusUseCase(adminRepo);
+const updateStatusUC = new UpdateStatusUseCase(adminRepo, publisher);
 const saveUserUC = new SaveUserUseCase(adminRepo, kafkaListener);
 
 const adminController = new AdminController(

@@ -2,10 +2,12 @@ import { GameId, Status } from "@/domain/value-objects/index";
 import { IAdminRepo } from "../interfaces/admin-repo.interface";
 import { IUpdateStatusUseCase } from "../interfaces/use-case.interface";
 import { UseCaseError } from "@/domain/errors/use-case.error";
+import { IEventPublisher } from "../interfaces/event-publisher.interface";
 
 export class UpdateStatusUseCase implements IUpdateStatusUseCase {
     constructor(
-        private readonly adminRepo: IAdminRepo
+        private readonly adminRepo: IAdminRepo,
+        private readonly eventPublisher: IEventPublisher
     ) { }
 
     async execute(gameId: string, status: string): Promise<{ success: boolean, message: string }> {
@@ -28,6 +30,10 @@ export class UpdateStatusUseCase implements IUpdateStatusUseCase {
                     message: "Failed to update user"
                 }
             }
+            await this.eventPublisher.publish("user.status.updated", {
+                gameId: gameId,
+                status: status
+            })
             return {
                 success: true,
                 message: "User status updated successfully"

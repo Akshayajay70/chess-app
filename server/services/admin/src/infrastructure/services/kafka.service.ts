@@ -2,6 +2,7 @@ import { Kafka } from "kafkajs";
 import { IUserCreatedEventListener } from "../../application/interfaces/event-listner.interface";
 import { AdminResponse } from "../../application/dtos/admin-response";
 import { config } from "../../config/index";
+import { IEventPublisher, Payload } from "@/application/interfaces/event-publisher.interface";
 
 export class KafkaUserCreatedListener implements IUserCreatedEventListener {
     async listen(callback: (data: AdminResponse) => Promise<void>): Promise<void> {
@@ -24,5 +25,22 @@ export class KafkaUserCreatedListener implements IUserCreatedEventListener {
                 }
             }
         });
+    }
+}
+
+export class KafkaUserStatusUpdate implements IEventPublisher {
+    async publish(eventName: string, payload: Payload): Promise<void> {
+        const kafka = new Kafka({
+            clientId: "admin-service",
+            brokers: [config.kafkaUrl]
+        });
+
+        const producer = kafka.producer();
+        await producer.connect();
+        await producer.send({
+            topic: eventName,
+            messages: [{ value: JSON.stringify(payload) }]
+        })
+        await producer.disconnect();
     }
 }
