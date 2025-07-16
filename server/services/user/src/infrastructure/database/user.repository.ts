@@ -68,4 +68,17 @@ export class UserRepository implements IUserRespository {
             );
         }
     }
+
+    async updateStatus(gameId: string, status: string): Promise<boolean> {
+        try {
+            const result = await UserModel.updateOne({ gameId }, { $set: { status } });
+            return result.modifiedCount > 0;
+        } catch (error) {
+            throw new DatabaseError(
+                "UPDATE",
+                "status",
+                error instanceof Error ? error : new Error("Failed to update user status")
+            );
+        }
+    }
 }

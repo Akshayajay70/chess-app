@@ -10,8 +10,9 @@ import { UpdateNameUseCase } from "./application/use-cases/update-name.uc";
 import { RefreshTokenUseCase } from "./application/use-cases/refresh-token.uc";
 import { GetUserUseCase } from './application/use-cases/get-user.uc';
 import { GoogleAuthService } from "./infrastructure/services/google-auth.service";
+import { UpdateStatusUseCase } from './application/use-cases/update-status.uc';
 import { JwtService } from "./infrastructure/services/jwt-token.service";
-import { KafkaEventPublisher } from './infrastructure/services/kafka/kafka-event-publisher';
+import { KafkaEventPublisher, EventUserStatusUpdatedListner } from './infrastructure/services/kafka/kafka-event-publisher';
 import { UserRepository } from "./infrastructure/database/user.repository";
 import { AuthController } from './presentation/controllers/auth.controller';
 import { UserController } from './presentation/controllers/user.controller';
@@ -25,7 +26,9 @@ const userRepo = new UserRepository();
 const googleService = new GoogleAuthService();
 const jwtService = new JwtService();
 const publisher = new KafkaEventPublisher();
+const listner = new EventUserStatusUpdatedListner();
 
+const updateStatusUC = new UpdateStatusUseCase(userRepo, listner)
 const getUserUC = new GetUserUseCase(userRepo);
 const userController = new UserController(getUserUC);
 
@@ -46,6 +49,9 @@ const { port: PORT } = config;
 // --- Middleware ---
 app.use(express.json());
 app.use(cookieParser());
+
+// --- Consumer ---
+updateStatusUC.execute();
 
 // --- Route Binding ---
 app.use('/auth', createAuthRoutes(authController));

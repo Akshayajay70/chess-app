@@ -16,6 +16,7 @@ export type IAuthGoogleUCOutput = {
     refreshToken?: string
 }
 
+
 export type IUpdateNameUCOutput = {
     success: boolean,
     accessToken?: string,
@@ -24,6 +25,10 @@ export type IUpdateNameUCOutput = {
 
 export interface IAuthGoogleUserUseCase {
     execute(code: string): Promise<IAuthGoogleUCOutput>;
+}
+
+export interface IUpdateStatusUseCase {
+    execute(): Promise<void>;
 }
 
 export interface IUpdateNameUseCase {
