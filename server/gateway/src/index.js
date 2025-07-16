@@ -32,7 +32,7 @@ app.use('/auth', createProxyMiddleware({
 }));
 
 app.use('/admin/login', createProxyMiddleware({
-    target: 'http://localhost:8002/admin',
+    target: 'http://localhost:8002/admin/login',
     changeOrigin: true
 }));
 

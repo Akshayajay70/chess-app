@@ -1,6 +1,14 @@
-import { Schema } from 'mongoose';
+import { Schema, Document } from 'mongoose';
 
-export const AdminSchema = new Schema(
+export interface AdminDoc extends Document {
+  gameId: string;
+  name: string;
+  email: string;
+  status: string;
+  createdAt: Date;
+}
+
+export const AdminSchema = new Schema<AdminDoc>(
     {
         gameId: {
             type: String,

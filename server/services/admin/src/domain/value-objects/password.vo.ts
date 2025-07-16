@@ -21,7 +21,7 @@ export class Password {
             typeof password === 'string' &&
             password.trim().length >= 3 &&
             password.trim().length <= 10 &&
-            /^[A-Za-z0-9\s'-]+$/.test(password)
+            /^[A-Za-z0-9\s'\-!@#$%^&*()_+=\[\]{};:,.<>/?|`~]+$/.test(password)
         );
     }
 }

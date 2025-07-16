@@ -20,5 +20,5 @@ export interface IUpdateStatusUseCase {
 }
 
 export interface ISaveUserUseCase {
-    execute(data: AdminResponse): Promise<{ success: boolean, message: string }>;
+    execute(): Promise<void>;
 }

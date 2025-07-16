@@ -1,4 +1,4 @@
 import { model } from "mongoose";
-import { AdminSchema } from "./admin.schema";
+import { AdminDoc, AdminSchema } from "./admin.schema";
 
-export const AdminModel = model("User", AdminSchema);
+export const AdminModel = model<AdminDoc>("Admin", AdminSchema);
