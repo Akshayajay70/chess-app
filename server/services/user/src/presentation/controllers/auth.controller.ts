@@ -1,17 +1,15 @@
 import { NextFunction, Request, Response } from "express";
-import { AuthGoogleUserUseCase } from "../../application/use-cases/auth-google-user.uc";
-import { UpdateNameUseCase } from "../../application/use-cases/update-name.uc";
 import { config } from "../../config";
 import { IGoogleAuthService } from "../../application/interfaces/google-auth.interface";
-import { RefreshTokenUseCase } from "../../application/use-cases/refresh-token.uc";
 import { TokenError } from "@/domain/errors/token.error";
+import { IAuthGoogleUserUseCase, IRefreshTokenUseCase, IUpdateNameUseCase } from "@/application/interfaces/use-cases.interface";
 
 export class AuthController {
     constructor(
-        private readonly authGoogleUseCase: AuthGoogleUserUseCase,
-        private readonly updateNameUseCase: UpdateNameUseCase,
+        private readonly authGoogleUseCase: IAuthGoogleUserUseCase,
+        private readonly updateNameUseCase: IUpdateNameUseCase,
         private readonly googleAuthService: IGoogleAuthService,
-        private readonly refreshTokenUseCase: RefreshTokenUseCase
+        private readonly refreshTokenUseCase: IRefreshTokenUseCase
     ) { }
 
     initiateGoogleLogin(req: Request, res: Response): void {
