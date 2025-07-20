@@ -32,7 +32,8 @@ export type MatchMakingResponse = {
     matchRoomId?: string,
     whitePlayer?: PlayerDetails,
     blackPlayer?: PlayerDetails,
-    variant?: variant
+    variant?: variant,
+    socketIds?: SocketId[]
 }
 
 export type CommunicationResponse = {

@@ -16,9 +16,9 @@ export class HandleDisconnectUseCase implements IHandleDisconnectUseCase {
             if (!isPlayerInMemory) return;
             const player = await this.playerRepo.get(socketId);
             if (!player) return;
-            const { rating } = player;
+            const { rating, variant } = player;
             await this.playerRepo.remove(socketId)
-            await this.matchMakingRepo.removeFromQueue(rating)
+            await this.matchMakingRepo.removeFromQueue(rating, variant)
         } catch (error) {
             throw new UseCaseError(
                 error instanceof Error

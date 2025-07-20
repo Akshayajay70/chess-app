@@ -28,7 +28,7 @@ export class JoinMatchUseCase implements IJoinMatchUseCase {
             if (!isOccupied) {
                 await this.matchMakingRepo.addToQueue(input);
                 return {
-                    success: true,
+                    success: false,
                     message: 'Player added to queue'
                 }
             }
@@ -62,6 +62,7 @@ export class JoinMatchUseCase implements IJoinMatchUseCase {
             await this.playerRepo.remove(opponent.socketId);
             await this.playerRepo.remove(socketId);
 
+            await this.matchMakingRepo.removeFromQueue(rating, variant);
             return {
                 success: true,
                 message: 'Match Found',
@@ -69,6 +70,7 @@ export class JoinMatchUseCase implements IJoinMatchUseCase {
                 whitePlayer: response.whitePlayer,
                 blackPlayer: response.blackPlayer,
                 variant: response.variant,
+                socketIds: [socketId, opponent.socketId]
             };
         } catch (error) {
             throw new UseCaseError(

@@ -4,7 +4,7 @@ export const variants = [
     'bullet(1+0)',
     'bullet(1+2)',
     'blitz(3+0)',
-    'blitz(3+3)',
+    'blitz(3+2)',
     'rapid(10+0)',
     'rapid(10+5)',
     'classic(60+30)',
