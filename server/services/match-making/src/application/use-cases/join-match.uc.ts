@@ -56,6 +56,7 @@ export class JoinMatchUseCase implements IJoinMatchUseCase {
                     name: playerB.name,
                     rating: playerB.rating,
                 },
+                "online",
                 playerA.variant
             );
 

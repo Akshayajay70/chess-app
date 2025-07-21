@@ -35,10 +35,12 @@ export type MatchMakingResponse = {
     variant?: variant,
     socketIds?: SocketId[]
 }
+export type GameType = "online"
 
 export type CommunicationResponse = {
     matchRoomId: string,
     whitePlayer: PlayerDetails,
     blackPlayer: PlayerDetails,
+    gameType: GameType
     variant: variant
 }

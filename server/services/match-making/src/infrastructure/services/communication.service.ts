@@ -1,10 +1,10 @@
-import { PlayerDetails, variant, CommunicationResponse } from "../../application/ports/types";
+import { PlayerDetails, variant, CommunicationResponse, GameType } from "../../application/ports/types";
 import { ICommunication } from "../../application/ports/interfaces/communication.interface";
 
 export class CommunicationService implements ICommunication {
-    async post(playerA: PlayerDetails, playerB: PlayerDetails, variant: variant): Promise<CommunicationResponse> {
+    async post(playerA: PlayerDetails, playerB: PlayerDetails, gameType: GameType, variant: variant): Promise<CommunicationResponse> {
         try {
-            const response = await fetch('http://localhost:8004/', {
+            const response = await fetch('http://localhost:8004/game/create-game', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -12,6 +12,7 @@ export class CommunicationService implements ICommunication {
                 body: JSON.stringify({
                     playerA,
                     playerB,
+                    gameType,
                     variant
                 })
             });
