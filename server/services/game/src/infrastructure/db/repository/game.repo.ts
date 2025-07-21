@@ -1,0 +1,42 @@
+import { MatchFindRequest, MatchFindResponse } from "../../../application/ports/types";
+import { IGameRepo } from "../../../application/ports/interfaces/game.repository.interface";
+import { GameModel } from "../models/game.model";
+import { DatabaseError } from "../../../domain/errors/database.error";
+
+export class GameRepo implements IGameRepo {
+    async create(input: MatchFindRequest): Promise<MatchFindResponse> {
+        try {
+            console.log(input)
+            const match = await GameModel.create({
+                whitePlayer: input.playerA,
+                blackPlayer: input.playerB,
+                varientName: input.variant,
+                gameType: input.gameType,
+                moves: [],
+                result: null,
+                endType: null,
+                pgn: ""
+            });
+            return {
+                matchRoomId: match._id.toString(),
+                whitePlayer: {
+                    gameId: match.whitePlayer.gameId,
+                    name: match.whitePlayer.name,
+                    rating: match.whitePlayer.rating
+                },
+                blackPlayer: {
+                    gameId: match.blackPlayer.gameId,
+                    name: match.blackPlayer.name,
+                    rating: match.blackPlayer.rating
+                },
+                variant: match.varientName
+            }
+        } catch (error) {
+            throw new DatabaseError(
+                "CREATE",
+                "Game",
+                error instanceof Error ? error : undefined
+            )
+        }
+    }
+}
