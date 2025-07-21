@@ -1,146 +1,169 @@
-import { useState } from 'react';
-import { Logo } from './Logo';
+import { NavLink } from "react-router-dom"
 
-export function Sidebar() {
-  // Local state for demonstration
-  const [activePage, setActivePage] = useState('home');
-  
-  // Mock user data
-  const user = {
-    username: 'Username123',
-    level: 6,
-    userId: '1234567890',
-    avatar: 'U'
-  };
+export function SideBar() {
+  const icons = [
+    {
+      name: 'Home',
+      svg: <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>,
+      to: '/home'
+    },
+    {
+      name: 'Clan',
+      svg: <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>,
+      to: '/'
+    },
+    {
+      name: 'Leaderboard',
+      svg: <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M8.7 14.3a1 1 0 0 1-1.4-1.4l9-9a1 1 0 0 1 1.4 1.4l-9 9z"
+        ></path>
+        <path d="M15 4h5v5"></path>
+        <path d="M9 20H4v-5"></path>
+      </svg>,
+      to: '/'
+    },
+    {
+      name: 'Notification',
+      svg: <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>,
+      to: '/'
+    }
+  ]
 
-  const navigationItems = [
-    { id: 'home', label: 'Home', icon: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', path: '9 22 9 12 15 12 15 22' },
-    { id: 'clan', label: 'Clan', icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2', path: 'M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75' },
-    { id: 'leaderboard', label: 'Leaderboard', icon: 'M8.7 14.3a1 1 0 0 1-1.4-1.4l9-9a1 1 0 0 1 1.4 1.4l-9 9z', path: 'M15 4h5v5 M9 20H4v-5' },
-    { id: 'search', label: 'Search', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
-    { id: 'friends', label: 'Friends', icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2', path: 'M9 7a4 4 0 1 1 8 0M9 7a4 4 0 0 1 4 4M9 7a4 4 0 0 0 4 4' },
-    { id: 'profile', label: 'Profile', icon: 'M12 4.354a4 4 0 1 1 0 5.292M15 21H3v-1a6 6 0 0 1 12 0v1zM13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0z' },
-    { id: 'stats', label: 'Stats', icon: 'M12 20V10 M18 20V4 M6 20v-8' },
-    { id: 'notifications', label: 'Notifications', icon: 'M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9', path: 'M13.73 21a2 2 0 0 1-3.46 0' },
-  ];
-
-  const handleNavigation = (pageId: string) => {
-    setActivePage(pageId);
-    console.log('Navigate to:', pageId);
-  };
-
-  const handlePremiumClick = () => {
-    console.log('Premium button clicked');
-  };
-
-  const handleSettingsClick = () => {
-    console.log('Settings clicked');
-  };
 
   return (
-    <div className="w-[280px] h-screen bg-sidebar-bg backdrop-blur-xl border-r border-white/5 shadow-inner-glow flex flex-col">
-      {/* Logo section */}
+    <div
+      className="w-full h-full bg-sidebar-bg backdrop-blur-xl border-r border-white/5 shadow-xl flex flex-col overflow-y-auto"
+    >
+      {/* <!-- Logo section --> */}
       <div className="px-6 py-8">
         <div className="flex items-center gap-4">
-          <div className="w-11 h-11 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center shadow-lg ring-2 ring-purple-500/20">
-            <Logo className="w-6 h-6" />
-          </div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Mately</h1>
+          <svg
+            className="text-white"
+            width="185"
+            height="60"
+            viewBox="0 0 192 65"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M29.0187 12.5806L44.5507 13.0437L29.0187 26.6705V12.5806ZM27.8905 13.3414V27.3816H13.4515C18.3753 22.8036 23.097 18.0456 27.8905 13.3414ZM43.7221 15.2431L45.7143 15.8716L38.5213 19.7909L43.7221 15.2431ZM4.76006 16.7977H7.91583L15.2675 24.1733L11.8473 27.3816H4.76006C4.76057 23.8513 4.76006 20.3261 4.76006 16.7977ZM3.63171 17.4426V20.5021H0L3.63171 17.4426ZM5.55343 28.44H27.626L21.4731 43.8695L5.55343 28.44ZM27.8905 30.8213V52.4193L20.6974 48.8142C23.0958 42.8158 25.4909 36.8212 27.8905 30.8213Z"
+              fill="currentColor"
+            />
+            <path d="M58.8571 0H57.1428V65H58.8571V0Z" fill="currentColor" />
+            <path
+              d="M67.4286 47.9872L70.0899 16.6646C71.5628 16.4189 73.3036 16.2961 75.3121 16.2961C77.3206 16.2961 79.0781 16.4189 80.5845 16.6646L83.5471 27.9499C84.7187 33.0475 85.338 35.8266 85.405 36.2873H85.7565C85.8904 35.5196 86.5097 32.7404 87.6144 27.9499L90.6272 16.6646C92.1001 16.4189 93.8408 16.2961 95.8494 16.2961C97.8579 16.2961 99.6154 16.4189 101.122 16.6646L103.783 47.9872C102.745 48.2329 101.465 48.3557 99.9418 48.3557C98.4186 48.3557 97.1717 48.2789 96.2009 48.1254L95.3975 35.32C95.1631 30.2224 95.0292 26.6755 94.9957 24.6795H94.6945L89.7233 43.427C88.5182 43.6112 87.1373 43.7034 85.5807 43.7034C84.0241 43.7034 82.6432 43.6112 81.4381 43.427L76.5172 24.6795H76.1657C76.1657 27.4125 76.0318 30.9594 75.764 35.32L75.0108 48.1254C74.04 48.2789 72.7931 48.3557 71.2699 48.3557C69.7468 48.3557 68.4663 48.2329 67.4286 47.9872ZM107.8 40.479C107.8 37.3774 109.608 34.8133 113.223 32.7865C110.143 30.9747 108.604 28.6102 108.604 25.6929C108.604 24.5259 108.888 23.4435 109.457 22.4454C110.026 21.4474 110.813 20.5876 111.817 19.8659C112.822 19.1443 114.01 18.5762 115.382 18.1616C116.755 17.747 118.245 17.5398 119.851 17.5398C121.492 17.5398 122.998 17.7394 124.371 18.1386C125.743 18.5378 126.906 19.0982 127.86 19.8199C128.814 20.5415 129.559 21.409 130.095 22.4224C130.631 23.4358 130.898 24.5566 130.898 25.785C130.898 28.3031 129.342 30.3605 126.228 31.9574C128.137 33.0015 129.543 34.1914 130.446 35.5272C131.35 36.8631 131.802 38.4062 131.802 40.1565C131.802 41.477 131.484 42.667 130.848 43.7264C130.212 44.7858 129.333 45.6917 128.212 46.4441C127.09 47.1965 125.777 47.7722 124.27 48.1715C122.764 48.5707 121.14 48.7703 119.399 48.7703C117.625 48.7703 116.027 48.5783 114.604 48.1945C113.181 47.8106 111.968 47.2655 110.964 46.5593C109.959 45.853 109.181 44.9854 108.629 43.9567C108.076 42.928 107.8 41.7687 107.8 40.479ZM119.6 35.4581L118.345 35.0436C116.537 36.4869 115.633 38.1605 115.633 40.0644C115.633 41.1392 116.01 42.0298 116.763 42.7361C117.516 43.4423 118.529 43.7955 119.801 43.7955C121.073 43.7955 122.069 43.4423 122.789 42.7361C123.509 42.0298 123.868 41.1546 123.868 40.1105C123.868 38.0223 122.446 36.4715 119.6 35.4581ZM116.236 25.6468C116.236 26.5373 116.579 27.2897 117.265 27.9039C117.952 28.518 118.998 29.0708 120.404 29.5621L121.057 29.7924C122.63 28.7176 123.417 27.3972 123.417 25.831C123.417 24.8791 123.082 24.1037 122.412 23.5049C121.743 22.9061 120.872 22.6067 119.801 22.6067C118.763 22.6067 117.91 22.8984 117.24 23.4818C116.571 24.0653 116.236 24.787 116.236 25.6468ZM149.628 41.8609H158.315C158.315 43.0892 158.231 44.141 158.064 45.0162C157.896 45.8913 157.361 46.6437 156.457 47.2732C155.553 47.9027 154.365 48.2175 152.892 48.2175H141.544C140.104 48.2175 138.966 47.8337 138.129 47.0659C137.292 46.2982 136.874 45.2541 136.874 43.9337V16.6185L137.225 16.2961H140.188C143.335 16.2961 144.908 17.8622 144.908 20.9945V42.0451C146.381 41.9223 147.954 41.8609 149.628 41.8609ZM170.818 24.4031L174.182 16.6185C175.053 16.4343 176.174 16.3421 177.547 16.3421C179.02 16.3421 180.292 16.5264 181.363 16.8949L181.714 17.2634L171.973 38.4062V48.0793C170.935 48.2636 169.596 48.3557 167.956 48.3557C166.316 48.3557 164.977 48.2636 163.939 48.0793V38.2219L154.248 17.4937C155.787 16.6646 157.26 16.25 158.666 16.25C160.072 16.25 161.085 16.4726 161.704 16.9179C162.324 17.3632 162.868 18.1232 163.336 19.198L165.746 24.6795C166.617 26.6448 167.37 28.8405 168.006 31.2664H168.307C168.843 29.3318 169.68 27.044 170.818 24.4031Z"
+              fill="currentColor"
+            />
+          </svg>
         </div>
       </div>
-
-      {/* User Profile Section */}
-      <div className="px-5 mb-6">
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-lg hover:bg-white/10 transition-all duration-300">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg ring-2 ring-purple-400/20">
-            {user.avatar}
+      {/* <!-- User Profile Section --> */}
+      <div className="px-2 mb-5">
+        <div
+          className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-lg hover:bg-white/10 transition-all duration-300"
+        >
+          <div
+            className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg ring-4 ring-purple-400/20"
+          >
+            G
           </div>
           <div className="flex flex-col gap-0.5">
             <div className="text-white font-medium tracking-tight">
-              {user.username}
+              Akshay Ajay
             </div>
-            <div className="text-purple-300/70 text-sm">
-              Level {user.level}
-            </div>
-            <div className="text-slate-400 text-xs">
-              ID: {user.userId}
-            </div>
+            <div className="text-purple-300/70 text-sm">Level 6</div>
+            <div className="text-slate-400 text-xs">ID: 1234567890</div>
           </div>
         </div>
       </div>
-
-      {/* Navigation Menu */}
-      <nav className="px-3 flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:transition-colors hover:[&::-webkit-scrollbar-thumb]:bg-white/20">
-        {/* Primary Navigation */}
+      {/* <!-- Navigation Menu --> */}
+      <nav className="px-3 flex-1 overflow-y-auto">
+        {/* <!-- Primary Navigation --> */}
         <div className="space-y-1 mb-4">
-          {navigationItems.slice(0, 3).map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavigation(item.id)}
-              className={`flex items-center gap-3.5 px-4 py-3 rounded-lg w-full text-left transition-all duration-300 ease-in-out hover:translate-x-1 ${
-                activePage === item.id
-                  ? 'bg-white/10 text-white'
-                  : 'text-slate-400 hover:bg-white/10 hover:text-white'
-              }`}
+          {icons.map((item, index) => (
+            <NavLink
+              to={item.to}
+              key={index}
+              className={({ isActive }) =>
+                `flex items-center gap-3.5 px-4 py-3 rounded-lg transition-all hover:bg-white/10 hover:text-white ${isActive ? 'bg-white/10 text-white' : 'text-slate-400'
+                }`
+              }
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d={item.icon} />
-                {item.path && <path d={item.path} />}
-              </svg>
-              <span className="font-medium">{item.label}</span>
-            </button>
+              {item.svg}
+              <span className="font-medium">{item.name}</span>
+            </NavLink>
           ))}
         </div>
 
-        {/* Secondary Navigation */}
-        <div className="space-y-1">
-          {navigationItems.slice(3).map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavigation(item.id)}
-              className={`flex items-center gap-3.5 px-4 py-3 rounded-lg w-full text-left transition-all duration-300 ease-in-out hover:translate-x-1 ${
-                activePage === item.id
-                  ? 'bg-white/10 text-white'
-                  : 'text-slate-400 hover:bg-white/10 hover:text-white'
-              }`}
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d={item.icon} />
-                {item.path && <path d={item.path} />}
-              </svg>
-              <span className="font-medium">{item.label}</span>
-            </button>
-          ))}
-        </div>
+
       </nav>
-
-      {/* Bottom Section */}
+      {/* <!-- Bottom Section --> */}
       <div className="px-5 py-6 space-y-6 border-t border-white/5">
-        {/* Premium Button */}
-        <button
-          onClick={handlePremiumClick}
-          className="w-full text-white rounded-xl py-3.5 px-4 flex items-center gap-3.5 shadow-lg bg-gradient-to-r from-[#9333EA] to-[#7E22CE] transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(147,51,234,0.3)]"
+        {/* <!-- Settings --> */}
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `flex items-center gap-3.5 px-4 py-3 rounded-lg transition-all hover:bg-white/10 hover:text-white ${isActive ? 'bg-white/10 text-white' : 'text-slate-400'
+            }`
+          }
         >
-          <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-lg">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-          </div>
-          <span className="font-semibold tracking-wide">Get Premium</span>
-        </button>
-
-        {/* Settings */}
-        <button
-          onClick={handleSettingsClick}
-          className="flex items-center gap-3.5 px-4 py-3 rounded-lg text-slate-400 hover:bg-white/10 hover:text-white transition-all duration-300 ease-in-out hover:translate-x-1 w-full text-left"
-        >
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+            ></path>
           </svg>
           <span className="font-medium">Settings</span>
-        </button>
+        </NavLink>
       </div>
     </div>
-  );
-} 
+
+  )
+}
