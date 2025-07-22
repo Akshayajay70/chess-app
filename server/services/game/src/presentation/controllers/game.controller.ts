@@ -9,7 +9,6 @@ export class GameController {
     async createGame(req: Request, res: Response, next: NextFunction) {
         try {
             const input = req.body;
-            console.log(input)
             const result = await this.createGameUseCase.execute(input);
             return res.json(result)
         } catch (error) {
