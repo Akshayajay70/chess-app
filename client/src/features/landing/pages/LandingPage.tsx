@@ -1,7 +1,7 @@
 import { Navbar } from '../components/Navbar';
-import { BackgroundIcons } from '../../../components/BackgroundIcons';
-import { FloatingIndicators } from '../../../components/FloatingIndicators';
-import { Chessboard } from '../../../components/Chessboard';
+import { BackgroundIcons } from '../../../shared/components/BackgroundIcons';
+import { FloatingIndicators } from '../../../shared/components/FloatingIndicators';
+import { Chessboard } from '../../../shared/components/Chessboard';
 import { FeatureItem } from '../components/FeatureItem';
 import { Link } from 'react-router-dom';
 

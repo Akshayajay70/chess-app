@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userAuthReducer from '../../features/auth/redux/auth.slice';
+import userAuthReducer from './slices/auth.slice';
 import loggerMiddleware from "./middlewares";
-import userManReducer from "../../features/admin-test/redux/userMan.slice";
-import adminAuthReducer from '../../features/admin-test/redux/admin-auth.slice'
+import userManReducer from "./slices/userMan.slice";
+import adminAuthReducer from './slices/admin-auth.slice'
 
 
 export const store = configureStore({

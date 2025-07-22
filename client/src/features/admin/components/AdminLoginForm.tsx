@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { adminAuthThunk } from "../redux/admin-auth.slice";
+import { adminAuthThunk } from "../../../app/redux/slices/admin-auth.slice";
 import { useAppDispatch, useAppSelector } from "../../../app/redux/hooks";
 
 export function AdminLoginForm() {

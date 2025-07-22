@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAppSelector } from "../redux/hooks";
 import type { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
-import { Spinner as AuthSpinner } from "../../components/Spinner";
+import { Spinner as AuthSpinner } from "../../shared/components/Spinner";
 export function PublicRoutes() {
     const token = useAppSelector((state: RootState) => state.userAuth.token);
     const [shouldRedirect, setShouldRedirect] = useState(false);
