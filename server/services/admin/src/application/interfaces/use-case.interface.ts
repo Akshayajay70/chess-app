@@ -1,5 +1,4 @@
-import { AdminResponse } from "../dtos/admin-response";
-import { SearchResponse } from "../dtos/search-response";
+import { SearchResponse } from "../dtos/search-response.ts";
 
 export interface ILoginUseCase {
     execute(username: string, password: string): Promise<{ success: boolean, message: string, accessToken?: string }>;

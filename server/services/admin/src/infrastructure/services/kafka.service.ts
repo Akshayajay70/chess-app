@@ -1,8 +1,8 @@
 import { Kafka } from "kafkajs";
-import { IUserCreatedEventListener } from "../../application/interfaces/event-listner.interface";
-import { AdminResponse } from "../../application/dtos/admin-response";
-import { config } from "../../config/index";
-import { IEventPublisher, Payload } from "@/application/interfaces/event-publisher.interface";
+import { IUserCreatedEventListener } from "../../application/interfaces/event-listner.interface.ts";
+import { AdminResponse } from "../../application/dtos/admin-response.ts";
+import { config } from "../../config/index.ts";
+import { IEventPublisher, Payload } from "../../application/interfaces/event-publisher.interface.ts";
 
 export class KafkaUserCreatedListener implements IUserCreatedEventListener {
     async listen(callback: (data: AdminResponse) => Promise<void>): Promise<void> {

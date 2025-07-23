@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ILoginUseCase, ISearchUserUseCase, IUpdateStatusUseCase } from "../../application/interfaces/use-case.interface";
+import { ILoginUseCase, ISearchUserUseCase, IUpdateStatusUseCase } from "../../application/interfaces/use-case.interface.ts";
 
 export class AdminController {
     constructor(

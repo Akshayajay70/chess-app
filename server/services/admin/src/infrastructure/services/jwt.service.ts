@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import { TokenPayload } from "../../application/dtos/token-payload";
-import { ITokenService } from "../../application/interfaces/token.interface";
-import { config } from "../../config/index";
-import { TokenError } from "../../domain/errors/token.error";
+import { TokenPayload } from "../../application/dtos/token-payload.ts";
+import { ITokenService } from "../../application/interfaces/token.interface.ts";
+import { config } from "../../config/index.ts";
+import { TokenError } from "../../domain/errors/token.error.ts";
 
 export class JwtService implements ITokenService {
     generateAccessToken(payload: TokenPayload): string {

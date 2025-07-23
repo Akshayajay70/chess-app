@@ -1,8 +1,8 @@
-import { UseCaseError } from "@/domain/errors/use-case.error";
-import { IAdminRepo } from "../interfaces/admin-repo.interface";
-import { ISaveUserUseCase } from "../interfaces/use-case.interface";
-import { CreatedAt, Email, GameId, Name, Status } from "@/domain/value-objects";
-import { IUserCreatedEventListener } from "../interfaces/event-listner.interface";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { IAdminRepo } from "../interfaces/admin-repo.interface.ts";
+import { ISaveUserUseCase } from "../interfaces/use-case.interface.ts";
+import { CreatedAt, Email, GameId, Name, Status } from "../../domain/value-objects/index.ts";
+import { IUserCreatedEventListener } from "../interfaces/event-listner.interface.ts";
 
 export class SaveUserUseCase implements ISaveUserUseCase {
     constructor(

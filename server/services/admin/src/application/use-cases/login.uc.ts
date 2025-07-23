@@ -1,7 +1,7 @@
-import { ILoginUseCase } from "../interfaces/use-case.interface";
-import { config } from "../../config/index";
-import { ITokenService } from "../interfaces/token.interface";
-import { UseCaseError } from "../../domain/errors/use-case.error";
+import { ILoginUseCase } from "../interfaces/use-case.interface.ts";
+import { config } from "../../config/index.ts";
+import { ITokenService } from "../interfaces/token.interface.ts";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
 
 export class LoginUseCase implements ILoginUseCase {
     constructor(

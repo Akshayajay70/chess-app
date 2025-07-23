@@ -1,19 +1,19 @@
 import express from 'express';
-import { config } from './config/index';
-import { connectDB } from './infrastructure/database/connection';
-import { errorHandlingMiddleware } from './presentation/middlewares/error-handling';
+import { config } from './config/index.ts';
+import { connectDB } from './infrastructure/database/connection.ts';
+import { errorHandlingMiddleware } from './presentation/middlewares/error-handling.ts';
 
 // --- Services & Use Cases ---
-import { AdminRepository } from "./infrastructure/database/admin.repo";
-import { KafkaUserCreatedListener } from "./infrastructure/services/kafka.service";
-import { LoginUseCase } from "./application/use-cases/login.uc";
-import { SearchUsersUseCase } from "./application/use-cases/search-users.uc";
-import { UpdateStatusUseCase } from "./application/use-cases/update-status.uc";
-import { SaveUserUseCase } from "./application/use-cases/save-user.uc";
-import { AdminController } from "./presentation/controllers/admin.controller";
-import { createAdminRoutes } from "./presentation/routes/admin.routes";
-import { JwtService } from "./infrastructure/services/jwt.service";
-import { KafkaUserStatusUpdate } from './infrastructure/services/kafka.service';
+import { AdminRepository } from "./infrastructure/database/admin.repo.ts";
+import { KafkaUserCreatedListener } from "./infrastructure/services/kafka.service.ts";
+import { LoginUseCase } from "./application/use-cases/login.uc.ts";
+import { SearchUsersUseCase } from "./application/use-cases/search-users.uc.ts";
+import { UpdateStatusUseCase } from "./application/use-cases/update-status.uc.ts";
+import { SaveUserUseCase } from "./application/use-cases/save-user.uc.ts";
+import { AdminController } from "./presentation/controllers/admin.controller.ts";
+import { createAdminRoutes } from "./presentation/routes/admin.routes.ts";
+import { JwtService } from "./infrastructure/services/jwt.service.ts";
+import { KafkaUserStatusUpdate } from './infrastructure/services/kafka.service.ts';
 
 const { port: PORT } = config;
 

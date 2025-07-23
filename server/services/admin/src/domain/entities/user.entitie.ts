@@ -1,4 +1,4 @@
-import { Email, Name, GameId, Status, CreatedAt } from "../value-objects";
+import { Email, Name, GameId, Status, CreatedAt } from "../value-objects/index.ts";
 
 export class UserEntity {
   private constructor(
@@ -41,7 +41,7 @@ export class UserEntity {
     return this.status.getValue();
   }
 
-  getCreatedAt(): string {
+  getCreatedAt(): Date {
     return this.createdAt.getValue();
   }
 }

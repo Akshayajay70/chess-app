@@ -1,4 +1,4 @@
-import { AdminResponse } from "./admin-response";
+import { AdminResponse } from "./admin-response.ts";
 
 export type SearchResponse = {
     users: AdminResponse[];

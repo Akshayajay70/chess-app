@@ -1,8 +1,8 @@
-import { GameId, Status } from "@/domain/value-objects/index";
-import { IAdminRepo } from "../interfaces/admin-repo.interface";
-import { IUpdateStatusUseCase } from "../interfaces/use-case.interface";
-import { UseCaseError } from "@/domain/errors/use-case.error";
-import { IEventPublisher } from "../interfaces/event-publisher.interface";
+import { GameId, Status } from "../../domain/value-objects/index.ts";
+import { IAdminRepo } from "../interfaces/admin-repo.interface.ts";
+import { IUpdateStatusUseCase } from "../interfaces/use-case.interface.ts";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { IEventPublisher } from "../interfaces/event-publisher.interface.ts";
 
 export class UpdateStatusUseCase implements IUpdateStatusUseCase {
     constructor(

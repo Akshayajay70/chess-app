@@ -1,5 +1,5 @@
-import { AdminResponse } from "../dtos/admin-response";
-import { SearchResponse } from "../dtos/search-response";
+import { AdminResponse } from "../dtos/admin-response.ts";
+import { SearchResponse } from "../dtos/search-response.ts";
 
 export interface IAdminRepo {
     saveUser(data: AdminResponse): Promise<boolean>

@@ -1,7 +1,7 @@
-import { UseCaseError } from "@/domain/errors/use-case.error";
-import { SearchResponse } from "../dtos/search-response";
-import { IAdminRepo } from "../interfaces/admin-repo.interface";
-import { ISearchUserUseCase } from "../interfaces/use-case.interface";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { SearchResponse } from "../dtos/search-response.ts";
+import { IAdminRepo } from "../interfaces/admin-repo.interface.ts";
+import { ISearchUserUseCase } from "../interfaces/use-case.interface.ts";
 
 export class SearchUsersUseCase implements ISearchUserUseCase {
     constructor(

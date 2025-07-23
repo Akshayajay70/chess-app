@@ -1,9 +1,9 @@
-import { IAdminRepo } from "../../application/interfaces/admin-repo.interface";
-import { AdminResponse } from "../../application/dtos/admin-response";
-import { SearchResponse } from "../../application/dtos/search-response";
-import { AdminModel } from "./admin.model";
-import { DatabaseError } from "../../domain/errors/database.error";
-import { AdminMapper } from "../mappers/admin.mapper";
+import { IAdminRepo } from "../../application/interfaces/admin-repo.interface.ts";
+import { AdminResponse } from "../../application/dtos/admin-response.ts";
+import { SearchResponse } from "../../application/dtos/search-response.ts";
+import { AdminModel } from "./admin.model.ts";
+import { DatabaseError } from "../../domain/errors/database.error.ts";
+import { AdminMapper } from "../mappers/admin.mapper.ts";
 
 export class AdminRepository implements IAdminRepo {
 

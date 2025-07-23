@@ -1,5 +1,5 @@
-import { AdminResponse } from "../../application/dtos/admin-response";
-import { AdminDoc } from "../database/admin.schema";
+import { AdminResponse } from "../../application/dtos/admin-response.ts";
+import { AdminDoc } from "../database/admin.schema.ts";
 import { isValidObjectId, Document } from "mongoose";
 
 export class AdminMapper {

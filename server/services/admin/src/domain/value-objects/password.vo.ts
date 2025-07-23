@@ -1,4 +1,4 @@
-import { ValidationError } from "../errors/validation.error";
+import { ValidationError } from "../errors/validation.error.ts";
 
 export class Password {
     private constructor(
