@@ -1,11 +1,11 @@
-import { GameId, Name } from "../../domain/value-objects";
-import { IGoogleAuthService } from "../interfaces/google-auth.interface";
-import { IAuthGoogleUCOutput, type IAuthGoogleUserUseCase } from "../interfaces/use-cases.interface";
-import { IUserRespository } from "../interfaces/user-repo.interface";
-import { UserEntity } from "../../domain/entities/user.entitie";
-import { UseCaseError } from "../../domain/errors/use-case.error";
-import { ITokenService } from "../interfaces/token-service.interface";
-import { IEventPublisher } from "../interfaces/event-publisher.interface";
+import { GameId } from "../../domain/value-objects/index.ts";
+import { IGoogleAuthService } from "../interfaces/google-auth.interface.ts";
+import { IAuthGoogleUCOutput, type IAuthGoogleUserUseCase } from "../interfaces/use-cases.interface.ts";
+import { IUserRespository } from "../interfaces/user-repo.interface.ts";
+import { UserEntity } from "../../domain/entities/user.entitie.ts";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { ITokenService } from "../interfaces/token-service.interface.ts";
+import { IEventPublisher } from "../interfaces/event-publisher.interface.ts";
 
 export class AuthGoogleUserUseCase implements IAuthGoogleUserUseCase {
     constructor(

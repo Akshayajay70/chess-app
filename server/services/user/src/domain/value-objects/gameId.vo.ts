@@ -1,4 +1,4 @@
-import { ValidationError } from "../errors/validation.error";
+import { ValidationError } from "../errors/validation.error.ts";
 import { randomBytes } from 'crypto';
 
 

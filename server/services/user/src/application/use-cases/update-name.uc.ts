@@ -1,8 +1,8 @@
-import { Email, Name } from "../../domain/value-objects";
-import { IUpdateNameUCOutput, IUpdateNameUseCase } from "../interfaces/use-cases.interface";
-import { IUserRespository } from "../interfaces/user-repo.interface";
-import { UseCaseError } from "../../domain/errors/use-case.error";
-import { ITokenService } from "../interfaces/token-service.interface";
+import { Email, Name } from "../../domain/value-objects/index.ts";
+import { IUpdateNameUCOutput, IUpdateNameUseCase } from "../interfaces/use-cases.interface.ts";
+import { IUserRespository } from "../interfaces/user-repo.interface.ts";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { ITokenService } from "../interfaces/token-service.interface.ts";
 
 export class UpdateNameUseCase implements IUpdateNameUseCase {
     constructor(

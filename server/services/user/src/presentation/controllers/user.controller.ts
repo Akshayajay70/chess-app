@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { GetUserUseCase } from "../../application/use-cases/get-user.uc";
+import { GetUserUseCase } from "../../application/use-cases/get-user.uc.ts";
 
 
 export class UserController {

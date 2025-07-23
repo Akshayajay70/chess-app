@@ -1,6 +1,6 @@
-import { UserDTO } from "@/application/dto/userDTO";
-import { UserResponse } from "../../application/dto/user-response";
-import { UserEntity } from "../../domain/entities/user.entitie";
+import { UserDTO } from "../../application/dto/userDTO.ts";
+import { UserResponse } from "../../application/dto/user-response.ts";
+import { UserEntity } from "../../domain/entities/user.entitie.ts";
 
 export class UserMapper {
     static toDatabase(user: UserEntity) {

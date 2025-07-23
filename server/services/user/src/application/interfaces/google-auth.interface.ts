@@ -1,5 +1,5 @@
-import { GoogleAuthDTO } from "../dto/google-auth";
-import { GoogleIdentityDTO } from "../dto/google-identity";
+import { GoogleAuthDTO } from "../dto/google-auth.ts";
+import { GoogleIdentityDTO } from "../dto/google-identity.ts";
 
 export interface IGoogleAuthService {
     getGoogleAuthRedirectUrl(): string;

@@ -1,7 +1,7 @@
-import { ITokenService } from "../interfaces/token-service.interface";
-import { UseCaseError } from "../../domain/errors/use-case.error";
-import { TokenError } from "@/domain/errors/token.error";
-import { IRefreshTokenUseCase, RefreshTokenInput, RefreshTokenOutput } from "../interfaces/use-cases.interface";
+import { ITokenService } from "../interfaces/token-service.interface.ts";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { TokenError } from "../../domain/errors/token.error.ts";
+import { IRefreshTokenUseCase, RefreshTokenInput, RefreshTokenOutput } from "../interfaces/use-cases.interface.ts";
 
 
 export class RefreshTokenUseCase implements IRefreshTokenUseCase{

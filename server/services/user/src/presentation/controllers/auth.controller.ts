@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { config } from "../../config";
-import { IGoogleAuthService } from "../../application/interfaces/google-auth.interface";
-import { TokenError } from "@/domain/errors/token.error";
-import { IAuthGoogleUserUseCase, IRefreshTokenUseCase, IUpdateNameUseCase } from "@/application/interfaces/use-cases.interface";
+import { config } from "../../config/index.ts";
+import { IGoogleAuthService } from "../../application/interfaces/google-auth.interface.ts";
+import { TokenError } from "../../domain/errors/token.error.ts";
+import { IAuthGoogleUserUseCase, IRefreshTokenUseCase, IUpdateNameUseCase } from "../../application/interfaces/use-cases.interface.ts";
 
 export class AuthController {
     constructor(

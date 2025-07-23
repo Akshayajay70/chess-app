@@ -1,4 +1,4 @@
-import { Email, Name, GameId, GoogleId, Status } from "../value-objects";
+import { Email, Name, GameId, GoogleId, Status } from "../value-objects/index.ts";
 
 export class UserEntity {
   private constructor(

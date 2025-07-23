@@ -1,9 +1,9 @@
-import { UserResponse } from "../../application/dto/user-response";
-import { IUserRespository } from "../../application/interfaces/user-repo.interface";
-import { UserEntity } from "../../domain/entities/user.entitie";
-import { UserMapper } from "../mapper/user-mapper";
-import { UserModel } from "./user.model";
-import { DatabaseError } from "../../domain/errors/database.error";
+import { UserResponse } from "../../application/dto/user-response.ts";
+import { IUserRespository } from "../../application/interfaces/user-repo.interface.ts";
+import { UserEntity } from "../../domain/entities/user.entitie.ts";
+import { UserMapper } from "../mapper/user-mapper.ts";
+import { UserModel } from "./user.model.ts";
+import { DatabaseError } from "../../domain/errors/database.error.ts";
 
 export class UserRepository implements IUserRespository {
     async create(user: UserEntity): Promise<UserResponse> {

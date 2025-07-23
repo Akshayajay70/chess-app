@@ -1,9 +1,9 @@
 import { OAuth2Client } from 'google-auth-library';
-import { IGoogleAuthService } from '../../application/interfaces/google-auth.interface';
-import { GoogleIdentityDTO } from '../../application/dto/google-identity';
-import { GoogleAuthDTO } from '../../application/dto/google-auth';
-import { config } from '../../config';
-import { GoogleAuthError } from '../../domain/errors/google-auth.error';
+import { IGoogleAuthService } from '../../application/interfaces/google-auth.interface.ts';
+import { GoogleIdentityDTO } from '../../application/dto/google-identity.ts';
+import { GoogleAuthDTO } from '../../application/dto/google-auth.ts';
+import { config } from '../../config/index.ts';
+import { GoogleAuthError } from '../../domain/errors/google-auth.error.ts';
 
 export class GoogleAuthService implements IGoogleAuthService {
     private readonly oauth2Client: OAuth2Client;

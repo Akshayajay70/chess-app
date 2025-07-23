@@ -1,5 +1,5 @@
-import { UserEntity } from "@/domain/entities/user.entitie";
-import { UserResponse } from "../dto/user-response";
+import { UserEntity } from "../../domain/entities/user.entitie.ts";
+import { UserResponse } from "../dto/user-response.ts";
 
 export interface IUserRespository {
     create(user: UserEntity): Promise<UserResponse>,

@@ -1,10 +1,10 @@
 import { type NextFunction, type Request, type Response } from "express";
-import { config } from "../../config";
-import { DatabaseError } from "../../domain/errors/database.error";
-import { ValidationError } from "../../domain/errors/validation.error";
-import { GoogleAuthError } from "../../domain/errors/google-auth.error";
-import { TokenError } from "../../domain/errors/token.error";
-import { UseCaseError } from "../../domain/errors/use-case.error";
+import { config } from "../../config/index.ts";
+import { DatabaseError } from "../../domain/errors/database.error.ts";
+import { ValidationError } from "../../domain/errors/validation.error.ts";
+import { GoogleAuthError } from "../../domain/errors/google-auth.error.ts";
+import { TokenError } from "../../domain/errors/token.error.ts";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
 
 const { nodeEnv } = config;
 

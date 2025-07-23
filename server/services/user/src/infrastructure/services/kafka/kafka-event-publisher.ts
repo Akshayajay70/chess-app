@@ -1,7 +1,7 @@
-import { UserResponse } from "@/application/dto/user-response"
-import { IEventPublisher } from "../../../application/interfaces/event-publisher.interface"
-import { kafka } from "./kafka-client"
-import { IUserCreatedEventListener, Payload } from "@/application/interfaces/event-listner.interface"
+import { UserResponse } from "../../../application/dto/user-response.ts";
+import { IEventPublisher } from "../../../application/interfaces/event-publisher.interface.ts";
+import { kafka } from "./kafka-client.ts";
+import { IUserCreatedEventListener, Payload } from "../../../application/interfaces/event-listner.interface.ts";
 
 export class KafkaEventPublisher implements IEventPublisher {
   private producer = kafka.producer()

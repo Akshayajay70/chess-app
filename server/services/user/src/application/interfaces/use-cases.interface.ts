@@ -1,4 +1,4 @@
-import { UserResponse } from "../dto/user-response";
+import { UserResponse } from "../dto/user-response.ts";
 
 export interface RefreshTokenInput {
     accessToken?: string;

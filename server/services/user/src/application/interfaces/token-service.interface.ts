@@ -1,4 +1,4 @@
-import { TokenPayload } from "../dto/token-payload";
+import { TokenPayload } from "../dto/token-payload.ts";
 
 export interface ITokenService {
     generateAccessToken(payload: TokenPayload): string;

@@ -1,8 +1,8 @@
-import { UseCaseError } from "@/domain/errors/use-case.error";
-import { UserResponse } from "../dto/user-response";
-import { IGetUserUseCase } from "../interfaces/use-cases.interface";
-import { IUserRespository } from "../interfaces/user-repo.interface";
-import { GameId } from "@/domain/value-objects";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { UserResponse } from "../dto/user-response.ts";
+import { IGetUserUseCase } from "../interfaces/use-cases.interface.ts";
+import { IUserRespository } from "../interfaces/user-repo.interface.ts";
+import { GameId } from "../../domain/value-objects/index.ts";
 
 export class GetUserUseCase implements IGetUserUseCase {
     constructor(

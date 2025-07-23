@@ -1,8 +1,8 @@
-import { UseCaseError } from "@/domain/errors/use-case.error";
-import { IUserCreatedEventListener } from "../interfaces/event-listner.interface";
-import { IUpdateStatusUseCase } from "../interfaces/use-cases.interface";
-import { IUserRespository } from "../interfaces/user-repo.interface";
-import { GameId, Status } from "@/domain/value-objects";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { IUserCreatedEventListener } from "../interfaces/event-listner.interface.ts";
+import { IUpdateStatusUseCase } from "../interfaces/use-cases.interface.ts";
+import { IUserRespository } from "../interfaces/user-repo.interface.ts";
+import { GameId, Status } from "../../domain/value-objects/index.ts";
 
 export class UpdateStatusUseCase implements IUpdateStatusUseCase {
     constructor(
