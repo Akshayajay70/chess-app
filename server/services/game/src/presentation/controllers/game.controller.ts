@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ICreateGame } from "../../application/ports/interfaces/use-case.interface";
+import { ICreateGame } from "../../application/ports/interfaces/use-case.interface.ts";
 
 export class GameController {
     constructor(

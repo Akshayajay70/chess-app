@@ -1,7 +1,7 @@
-import { MatchFindRequest, MatchFindResponse } from "../../../application/ports/types";
-import { IGameRepo } from "../../../application/ports/interfaces/game.repository.interface";
-import { GameModel } from "../models/game.model";
-import { DatabaseError } from "../../../domain/errors/database.error";
+import { MatchFindRequest, MatchFindResponse } from "../../../application/ports/types/index.ts";
+import { IGameRepo } from "../../../application/ports/interfaces/game.repository.interface.ts";
+import { GameModel } from "../models/game.model.ts";
+import { DatabaseError } from "../../../domain/errors/database.error.ts";
 
 export class GameRepo implements IGameRepo {
     async create(input: MatchFindRequest): Promise<MatchFindResponse> {

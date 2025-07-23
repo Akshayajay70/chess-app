@@ -1,8 +1,8 @@
-import { UseCaseError } from "@/domain/errors/use-case.error";
-import { IGameRepo } from "../ports/interfaces/game.repository.interface";
-import { ICreateGame } from "../ports/interfaces/use-case.interface";
-import { MatchFindRequest, MatchFindResponse } from "../ports/types";
-import { GameId, Rating, Variant } from "../../domain/value-objects";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { IGameRepo } from "../ports/interfaces/game.repository.interface.ts";
+import { ICreateGame } from "../ports/interfaces/use-case.interface.ts";
+import { MatchFindRequest, MatchFindResponse } from "../ports/types/index.ts";
+import { GameId, Rating, Variant } from "../../domain/value-objects/index.ts";
 
 export class CreateGameUseCase implements ICreateGame {
     constructor(

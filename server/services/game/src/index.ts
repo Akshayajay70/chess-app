@@ -1,14 +1,14 @@
 import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import { config } from './config/index';
-import { connectDB } from './infrastructure/db/connection/connection';
+import { config } from './config/index.ts';
+import { connectDB } from './infrastructure/db/connection/connection.ts';
 
-import { createGameRoutes } from './presentation/routes/game.routes';
-import { GameController } from './presentation/controllers/game.controller';
-import { CreateGameUseCase } from './application/use-cases/create-game.uc';
-import { GameRepo } from './infrastructure/db/repository/game.repo';
-import { errorHandlingMiddleware } from './presentation/middlewares/error-handling';
+import { createGameRoutes } from './presentation/routes/game.routes.ts';
+import { GameController } from './presentation/controllers/game.controller.ts';
+import { CreateGameUseCase } from './application/use-cases/create-game.uc.ts';
+import { GameRepo } from './infrastructure/db/repository/game.repo.ts';
+import { errorHandlingMiddleware } from './presentation/middlewares/error-handling.ts';
 
 const gameRepo = new GameRepo()
 const createGameUseCase = new CreateGameUseCase(gameRepo)

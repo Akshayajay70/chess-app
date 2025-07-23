@@ -1,7 +1,5 @@
-import { config } from "../../../config/index";
+import { config } from "../../../config/index.ts";
 import mongoose from "mongoose";
-
-
 
 export async function connectDB() {
     try {

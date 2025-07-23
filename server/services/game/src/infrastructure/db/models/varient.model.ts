@@ -1,4 +1,5 @@
 import { model } from "mongoose";
-import { IVarient, varientSchema } from "../schema/varient.schema";
+import { varientSchema } from "../schema/varient.schema.ts";
+import { VariantType } from "../../../application/ports/types/index.ts";
 
-export const VarientModel = model<IVarient>('Varient', varientSchema);
+export const VarientModel = model<VariantType>('Varient', varientSchema);

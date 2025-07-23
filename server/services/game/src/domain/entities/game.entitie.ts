@@ -1,5 +1,5 @@
-import { VariantType } from "./variant.entitie";
-import { Move } from "./move.entitie";
+import { VariantType } from "./variant.entitie.ts";
+import { Move } from "./move.entitie.ts";
 
 export const Game = ['friend', 'online', 'war'];
 export type GameType = typeof Game[number];

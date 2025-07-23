@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { GameController } from "../controllers/game.controller";
+import { GameController } from "../controllers/game.controller.ts";
 
 export function createGameRoutes(gameController: GameController): Router {
     const router = Router();

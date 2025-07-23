@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { PlayerColor, PromotionPiece } from '../types';
+import { PlayerColor, PromotionPiece } from '../types/index.ts';
 
 export const moveValidator = yup.object({
     moveNumber: yup.number().required(),

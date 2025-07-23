@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { moveSchema } from './move.schema';
+import { moveSchema } from './move.schema.ts';
 import {
     endTypes,
     Game,
@@ -7,7 +7,7 @@ import {
     IPlayer,
     variants,
     IGameSchema
-} from '../../../application/ports/types/index';
+} from '../../../application/ports/types/index.ts';
 
 
 const playerSchema = new Schema<IPlayer>(

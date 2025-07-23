@@ -1,5 +1,5 @@
-import { ValidationError } from "../errors/validation.error";
-import { variants, type VariantType } from "../entities/variant.entitie";
+import { ValidationError } from "../errors/validation.error.ts";
+import { variants, type VariantType } from "../entities/variant.entitie.ts";
 
 export class Variant {
     private constructor(private readonly value: VariantType) { }

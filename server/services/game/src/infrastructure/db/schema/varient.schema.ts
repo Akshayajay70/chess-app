@@ -1,4 +1,4 @@
-import { variants, IVariantSchema } from '../../../application/ports/types/index'
+import { variants, IVariantSchema } from '../../../application/ports/types/index.ts'
 import { Schema } from "mongoose";
 
 export const varientSchema = new Schema<IVariantSchema>(

@@ -2,14 +2,14 @@ import {
     type VariantType,
     type IVariantSchema,
     variants
-} from '../../../domain/entities/variant.entitie'
+} from '../../../domain/entities/variant.entitie.ts';
 import {
     PlayerColor,
     PromotionPiece,
     type PlayerColorType,
     type PromotionPieceType,
     type Move as IMove
-} from "../../../domain/entities/move.entitie";
+} from "../../../domain/entities/move.entitie.ts";
 
 import {
     Game,
@@ -20,7 +20,7 @@ import {
     type EndType,
     type IPlayer,
     type IGameSchema
-} from "../../../domain/entities/game.entitie";
+} from "../../../domain/entities/game.entitie.ts";
 
 export {
     PlayerColor,

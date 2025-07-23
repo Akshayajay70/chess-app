@@ -1,4 +1,4 @@
-import { IMove, PlayerColor, PromotionPiece } from "../../../application/ports/types/index";
+import { IMove, PlayerColor, PromotionPiece } from "../../../application/ports/types/index.ts";
 import { Schema } from "mongoose";
 
 export const moveSchema = new Schema<IMove>({
