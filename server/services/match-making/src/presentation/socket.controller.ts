@@ -1,9 +1,8 @@
-import { IHandleDisconnectUseCase, IJoinMatchUseCase } from "@/application/ports/interfaces/uc.interface";
-import { Value } from "../application/ports/types";
+import { IHandleDisconnectUseCase, IJoinMatchUseCase } from "../application/ports/interfaces/uc.interface.ts";
+import { Value } from "../application/ports/types/index.ts";
 import { Server, Socket } from "socket.io";
-import { ValidationError } from "@/domain/errors/validation.error";
-import { UseCaseError } from "@/domain/errors/use-case.error";
-import { MatchMakingRepo } from "@/infrastructure/repositories/match-making";
+import { ValidationError } from "../domain/errors/validation.error.ts";
+import { UseCaseError } from "../domain/errors/use-case.error.ts";
 
 export class SocketController {
     private readonly handleDisconnectUseCase;

@@ -1,4 +1,4 @@
-import { CommunicationResponse, PlayerDetails, variant } from "../types";
+import { CommunicationResponse, PlayerDetails, variant } from "../types/index.ts";
 
 export interface ICommunication {
     post(

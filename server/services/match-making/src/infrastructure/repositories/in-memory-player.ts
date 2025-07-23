@@ -1,5 +1,5 @@
-import { IPlayerRepository } from "../../application/ports/interfaces/in-memory-player.repo";
-import { SocketDTO, SocketId, Value } from "../../application/ports/types";
+import { IPlayerRepository } from "../../application/ports/interfaces/in-memory-player.repo.ts";
+import { SocketDTO, SocketId, Value } from "../../application/ports/types/index.ts";
 
 export class InMemoryPlayerRepository implements IPlayerRepository {
     private readonly players = new Map<SocketId, Value>()

@@ -1,10 +1,10 @@
-import { GameId, Rating, Variant } from "../../domain/value-objects";
-import { UseCaseError } from "../../domain/errors/use-case.error";
-import { ICommunication } from "../ports/interfaces/communication.interface";
-import { IPlayerRepository } from "../ports/interfaces/in-memory-player.repo";
-import { IMatchMakingRepo } from "../ports/interfaces/match-making.repo";
-import { IJoinMatchUseCase } from "../ports/interfaces/uc.interface";
-import { MatchMakingResponse, SocketDTO } from "../ports/types";
+import { GameId, Rating, Variant } from "../../domain/value-objects/index.ts";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { ICommunication } from "../ports/interfaces/communication.interface.ts";
+import { IPlayerRepository } from "../ports/interfaces/in-memory-player.repo.ts";
+import { IMatchMakingRepo } from "../ports/interfaces/match-making.repo.ts";
+import { IJoinMatchUseCase } from "../ports/interfaces/uc.interface.ts";
+import { MatchMakingResponse, SocketDTO } from "../ports/types/index.ts";
 
 export class JoinMatchUseCase implements IJoinMatchUseCase {
     constructor(

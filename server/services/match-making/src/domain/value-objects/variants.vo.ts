@@ -1,4 +1,4 @@
-import { ValidationError } from "../errors/validation.error";
+import { ValidationError } from "../errors/validation.error.ts";
 
 export const variants = [
     'bullet(1+0)',

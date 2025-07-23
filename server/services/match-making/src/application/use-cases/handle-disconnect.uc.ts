@@ -1,8 +1,8 @@
-import { UseCaseError } from "@/domain/errors/use-case.error";
-import { IPlayerRepository } from "../ports/interfaces/in-memory-player.repo";
-import { IMatchMakingRepo } from "../ports/interfaces/match-making.repo";
-import { IHandleDisconnectUseCase } from "../ports/interfaces/uc.interface";
-import { SocketId } from "../ports/types";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { IPlayerRepository } from "../ports/interfaces/in-memory-player.repo.ts";
+import { IMatchMakingRepo } from "../ports/interfaces/match-making.repo.ts";
+import { IHandleDisconnectUseCase } from "../ports/interfaces/uc.interface.ts";
+import { SocketId } from "../ports/types/index.ts";
 
 export class HandleDisconnectUseCase implements IHandleDisconnectUseCase {
     constructor(

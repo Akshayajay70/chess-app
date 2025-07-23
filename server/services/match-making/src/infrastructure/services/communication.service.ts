@@ -1,5 +1,5 @@
-import { PlayerDetails, variant, CommunicationResponse, GameType } from "../../application/ports/types";
-import { ICommunication } from "../../application/ports/interfaces/communication.interface";
+import { PlayerDetails, variant, CommunicationResponse, GameType } from "../../application/ports/types/index.ts";
+import { ICommunication } from "../../application/ports/interfaces/communication.interface.ts";
 
 export class CommunicationService implements ICommunication {
     async post(playerA: PlayerDetails, playerB: PlayerDetails, gameType: GameType, variant: variant): Promise<CommunicationResponse> {

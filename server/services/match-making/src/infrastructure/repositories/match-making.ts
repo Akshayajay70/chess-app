@@ -1,6 +1,6 @@
-import { QueueValue, SocketDTO, variant } from "../../application/ports/types";
-import { IMatchMakingRepo } from "../../application/ports/interfaces/match-making.repo";
-import { variants } from "../../domain/value-objects/variants.vo";
+import { QueueValue, SocketDTO, variant } from "../../application/ports/types/index.ts";
+import { IMatchMakingRepo } from "../../application/ports/interfaces/match-making.repo.ts";
+import { variants } from "../../domain/value-objects/variants.vo.ts";
 
 export class MatchMakingRepo implements IMatchMakingRepo {
     private readonly variantPool;

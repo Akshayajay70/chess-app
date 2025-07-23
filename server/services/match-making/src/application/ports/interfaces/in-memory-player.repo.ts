@@ -1,4 +1,4 @@
-import { SocketDTO, SocketId, Value } from "../types";
+import { SocketDTO, SocketId, Value } from "../types/index.ts";
 
 export interface IPlayerRepository {
     add(input: SocketDTO): Promise<void>;

@@ -1,4 +1,4 @@
-import { MatchMakingResponse, SocketDTO, SocketId } from "../types"
+import { MatchMakingResponse, SocketDTO, SocketId } from "../types/index.ts"
 
 export interface IJoinMatchUseCase {
     execute(input: SocketDTO): Promise<MatchMakingResponse>

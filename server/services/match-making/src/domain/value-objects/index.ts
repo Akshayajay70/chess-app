@@ -1,3 +1,3 @@
-export { GameId } from "./gameId.vo";
-export { Rating } from "./rating.vo";
-export { Variant } from './variants.vo'
+export { GameId } from "./gameId.vo.ts";
+export { Rating } from "./rating.vo.ts";
+export { Variant } from './variants.vo.ts';

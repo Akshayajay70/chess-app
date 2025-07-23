@@ -1,4 +1,4 @@
-import { QueueValue, SocketDTO, variant } from "../types";
+import { QueueValue, SocketDTO, variant } from "../types/index.ts";
 
 export interface IMatchMakingRepo {
     getContainerIndex(rating: number): number;
