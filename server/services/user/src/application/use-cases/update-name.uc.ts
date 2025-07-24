@@ -25,11 +25,13 @@ export class UpdateNameUseCase implements IUpdateNameUseCase {
             const accessToken = this.tokenService.generateAccessToken({
                 email,
                 gameId: user.gameId,
+                name: user.name,
                 role: 'user'
             })
             const refreshToken = this.tokenService.generateRefreshToken({
                 email,
                 gameId: user.gameId,
+                name: user.name,
                 role: 'user'
             })
 

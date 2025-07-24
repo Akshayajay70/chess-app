@@ -45,12 +45,14 @@ export class AuthGoogleUserUseCase implements IAuthGoogleUserUseCase {
             const accessToken = this.tokenService.generateAccessToken({
                 email: user.email,
                 gameId: user.gameId,
+                name: user.name,
                 role: 'user'
             });
 
             const refreshToken = this.tokenService.generateRefreshToken({
                 email: user.email,
                 gameId: user.gameId,
+                name: user.name,
                 role: 'user'
             });
 

@@ -1,9 +1,23 @@
+import { useEffect } from "react";
 import { SideBar } from "../../../shared/components/Sidebar";
 import { GameHistoryCard } from "../components/GameHistoryCard";
 import { PlayCard } from "../components/PlayCards";
 import { RatingCard } from "../components/RatingCards";
+import { useAppDispatch, useAppSelector } from "../../../app/redux/hooks";
+import { fetchRating } from "../../../app/redux/slices/rating.slice";
+import { GameSpinner } from "../components/GameSpinner";
 
 export function HomePage() {
+    const dispatch = useAppDispatch();
+    const matchStatus = useAppSelector(state => state.matchMaking.status)
+    const ratings = Object.entries(useAppSelector(state => state.rating.ratings)!)
+    useEffect(() => {
+        dispatch(fetchRating())
+    }, [dispatch])
+
+    if (matchStatus === 'finding') return <GameSpinner />
+    if (matchStatus === 'matched') return <div>Match is playing</div>
+
     return (
         <div className="h-screen bg-gradient-to-br from-slate-900 to-slate-800 grid grid-cols-12 gap-4 overflow-hidden">
             {/* Sidebar */}
@@ -25,10 +39,9 @@ export function HomePage() {
                                 Rating
                             </div>
                             <div className="flex gap-6 mb-8">
-                                <RatingCard variant="bullet" rating={2000} />
-                                <RatingCard variant="bullet" rating={2000} />
-                                <RatingCard variant="bullet" rating={2000} />
-                                <RatingCard variant="bullet" rating={2000} />
+                                {ratings.map((item, key) => (
+                                    <RatingCard key={key} variant={item[0]} rating={item[1]} />
+                                ))}
                             </div>
                         </div>
                     </div>

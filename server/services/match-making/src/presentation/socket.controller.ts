@@ -55,7 +55,7 @@ export class SocketController {
                     socketId: socket.id,
                     ...user
                 }
-
+                console.log(input)
                 const response = await this.joinMatchUseCase.execute(input);
                 if (response.success && response.socketIds) {
                     this.io.to(response.socketIds[0]).emit('match_found', response);

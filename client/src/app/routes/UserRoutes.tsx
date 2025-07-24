@@ -9,7 +9,6 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAppSelector } from "../redux/hooks";
 import type { RootState } from "../redux/store";
 import { HomePage } from "../../features/user/pages/HomePage"
-import { GameSpinner } from "../../features/user/components/GameSpinner"
 
 function AdminProtectedRoutes() {
     const isAuthenticated = useAppSelector((state: RootState) => state.adminAuth.isAuthenticated);
@@ -26,14 +25,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/home',
-        element: <HomePage />,
-        children: [
-            { index: true, element: <HomePage /> }
-        ]
-    },
-    {
-        path: '/spinner',
-        element: <GameSpinner />,
+        element: <ProtectedRoutes />,
         children: [
             { index: true, element: <HomePage /> }
         ]
