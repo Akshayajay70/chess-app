@@ -3,11 +3,11 @@ import { UserTable } from '../components/UserTable';
 import type { UserTableSortField } from '../components/UserTable';
 import { SearchBar } from '../components/SearchBar';
 import { Pagination } from '../components/Pagination';
-import type { FilterTypes } from '../../../app/redux/slices/userMan.slice';
-import type { UpdateUserTypes } from '../../../app/redux/slices/userMan.slice';
+import type { FilterTypes } from '../../../app/redux/slices/user-man.slice';
+import type { UpdateUserTypes } from '../../../app/redux/slices/user-man.slice';
 import { AdminLayout } from '../../../shared/components/AdminLayout';
 import { useAppDispatch, useAppSelector } from '../../../app/redux/hooks';
-import { getUsersThunk, updateUserThunk, setSearchTerm, setDebouncedSearchTerm, setPage, setSortField, setSortDirection } from '../../../app/redux/slices/userMan.slice';
+import { getUsersThunk, updateUserThunk, setSearchTerm, setDebouncedSearchTerm, setPage, setSortField, setSortDirection } from '../../../app/redux/slices/user-man.slice';
 
 export function UserManagementPage() {
   const PAGE_SIZE = 10;
