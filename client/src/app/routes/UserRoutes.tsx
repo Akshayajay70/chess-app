@@ -3,8 +3,8 @@ import { GoogleAuthPage } from "../../features/auth/pages/GoogleAuthPage"
 import { LandingPage } from "../../features/landing/pages/LandingPage"
 import { PublicRoutes } from "./PublicRoutes"
 import { ProtectedRoutes } from "./ProtectedRoutes"
-import { AdminLoginPage } from "../../features/admin-test/pages/AuthPage"
-import { UserManagementPage } from "../../features/admin-test/pages/UserManagementPage"
+import { AdminLoginPage } from "../../features/admin/pages/AuthPage"
+import { UserManagementPage } from "../../features/admin/pages/UserManagementPage"
 import { Navigate, Outlet } from "react-router-dom";
 import { useAppSelector } from "../redux/hooks";
 import type { RootState } from "../redux/store";

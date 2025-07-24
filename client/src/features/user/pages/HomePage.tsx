@@ -1,4 +1,4 @@
-import { SideBar } from "../../../components/Sidebar";
+import { SideBar } from "../../../shared/components/Sidebar";
 import { GameHistoryCard } from "../components/GameHistoryCard";
 import { PlayCard } from "../components/PlayCards";
 import { RatingCard } from "../components/RatingCards";

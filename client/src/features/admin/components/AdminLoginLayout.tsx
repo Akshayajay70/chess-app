@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Logo } from '../../../components/Logo';
+import { Logo } from '../../../shared/components/Logo';
 
 interface AdminLoginLayoutProps {
   children: ReactNode;

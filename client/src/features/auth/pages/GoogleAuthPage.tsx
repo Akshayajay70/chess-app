@@ -1,14 +1,14 @@
-import { BackgroundIcons } from "../../../components/BackgroundIcons";
-import { FloatingIndicators } from "../../../components/FloatingIndicators";
-import ChessIcons from "../../../components/ChessIcons";
+import { BackgroundIcons } from "../../../shared/components/BackgroundIcons";
+import { FloatingIndicators } from "../../../shared/components/FloatingIndicators";
+import ChessIcons from "../../../shared/components/ChessIcons";
 import HeadingText from "../components/HeadingText";
 import GoogleButton from "../components/GoogleButton";
 import { TermsNotice } from "../components/TermNotice";
 import { useAppSelector, useAppDispatch } from "../../../app/redux/hooks";
-import { setLoading, setMode, setToken, setError, setUser } from "../redux/auth.slice";
+import { setLoading, setMode, setToken, setError, setUser } from "../../../app/redux/slices/auth.slice";
 import { useEffect, useState, useRef } from "react";
 import type { RootState } from "../../../app/redux/store";
-import { Spinner as AuthSpinner } from "../../../components/Spinner";
+import { Spinner as AuthSpinner } from "../../../shared/components/Spinner";
 
 export interface GooglePageProps {
     mode: 'signup' | 'signin'
