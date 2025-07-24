@@ -7,8 +7,9 @@ export class RatingController {
     ) { }
     async getRating(req: Request, res: Response, next: NextFunction) {
         try {
-            const { gameId } = req.body;
-            const response = await this.getUserRating.execute(gameId);
+            console.log(req.headers)
+            const gameId = req.headers['x-game-id'];
+            const response = await this.getUserRating.execute(gameId as string);
             if (!response) {
                 return res.status(401).json({
                     success: false,

@@ -41,5 +41,10 @@ app.use('/admin', verifyToken('admin'), createProxyMiddleware({
     changeOrigin: true
 }));
 
+app.use('/rating', verifyToken('user'), createProxyMiddleware({
+    target: 'http://localhost:8005/rating',
+    changeOrigin: true
+}));
+
 
 app.listen(PORT, () => console.log(`Gateway is running on Port: ${PORT}`));
