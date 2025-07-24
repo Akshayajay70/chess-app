@@ -13,19 +13,26 @@ const variants = [
 type VariantType = typeof variants[number];
 
 interface IRatingState {
-    rating: Record<VariantType, number> | null,
+    ratings: Record<VariantType, number> | null,
     loading: boolean,
     error: string | null
 }
 
 interface IRatingResponse {
-    gameId: string,
-    name: string,
-    rating: Record<VariantType, number> | null
+    data: {
+        gameId: string,
+        name: string,
+        ratings: Record<VariantType, number>
+    }
 }
 
 const initialState: IRatingState = {
-    rating: null,
+    ratings: {
+        bullet: 100,
+        blitz: 100,
+        rapid: 100,
+        classic: 100
+    },
     loading: false,
     error: null
 }
@@ -41,6 +48,7 @@ export const fetchRating = createAsyncThunk(
                     Authorization: `Bearer ${token}`
                 }
             });
+            console.log(response.data.ratings)
             return response.data;
         } catch (err) {
             return thunkAPI.rejectWithValue(err instanceof Error ? err.message : "Failed to fetch rating");
@@ -61,7 +69,7 @@ const ratingSlice = createSlice({
             })
             .addCase(fetchRating.fulfilled, (state, action: PayloadAction<IRatingResponse>) => {
                 state.loading = false,
-                    state.rating = action.payload.rating
+                    state.ratings = action.payload.data.ratings
             })
             .addCase(fetchRating.rejected, (state, action) => {
                 state.loading = false,

@@ -19,7 +19,7 @@ export function PublicRoutes() {
 
     if (token && !shouldRedirect) return <AuthSpinner />;
 
-    if (token && shouldRedirect) return <Navigate to={'/user/home'} replace />;
+    if (token && shouldRedirect) return <Navigate to={'/home'} replace />;
 
     return <Outlet />;
 }

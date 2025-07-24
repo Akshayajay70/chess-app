@@ -14,7 +14,8 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: '*'
+        origin: config.frontendUrl,
+        credentials: true
     }
 })
 const { port: PORT } = config;

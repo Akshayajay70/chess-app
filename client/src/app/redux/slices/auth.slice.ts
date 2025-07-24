@@ -1,10 +1,17 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { jwtDecode } from "jwt-decode";
 
 interface IUser {
     gameId: string;
     email: string;
     name?: string;
     picture?: string;
+}
+
+interface JwtPayload {
+    gameId: string,
+    email: string,
+    name: string
 }
 
 // Define the auth slice state interface
@@ -19,18 +26,36 @@ interface AuthState {
 }
 
 // Helper function to get initial state based on mode
-const getInitialState = (mode: 'signup' | 'signin'): AuthState => ({
-    mode,
-    user: null,
-    token: localStorage.getItem('user_access_token'),
-    loading: false,
-    error: undefined,
-    headingTitle: mode === 'signup' ? 'Create Your Account' : 'Welcome Back',
-    headingSubtitle: mode === 'signup' 
-        ? 'Sign up to start your journey'
-        : 'Sign in to continue your adventure'
-});
+const getInitialState = (mode: 'signup' | 'signin'): AuthState => {
+    const token = localStorage.getItem('user_access_token');
+    let user: IUser | null = null;
 
+    if (token) {
+        try {
+            const decoded = jwtDecode<JwtPayload>(token);
+            user = {
+                gameId: decoded.gameId,
+                email: decoded.email,
+                name: decoded.name,
+            };
+        } catch (err) {
+            console.error("Failed to decode token on init", err);
+            localStorage.removeItem('user_access_token');
+        }
+    }
+
+    return {
+        mode,
+        user,
+        token,
+        loading: false,
+        error: undefined,
+        headingTitle: mode === 'signup' ? 'Create Your Account' : 'Welcome Back',
+        headingSubtitle: mode === 'signup'
+            ? 'Sign up to start your journey'
+            : 'Sign in to continue your adventure'
+    };
+};
 const initialState: AuthState = getInitialState('signup');
 
 const authSlice = createSlice({
@@ -48,6 +73,18 @@ const authSlice = createSlice({
             const token = action.payload;
             localStorage.setItem('user_access_token', token);
             state.token = token;
+
+            try {
+                const decoded = jwtDecode<JwtPayload>(token);
+                state.user = {
+                    gameId: decoded.gameId,
+                    email: decoded.email,
+                    name: decoded.name,
+                };
+            } catch (error) {
+                console.error("Invalid JWT token", error);
+                state.user = null;
+            }
         },
         setLoading(state, action: PayloadAction<boolean>) {
             state.loading = action.payload;
@@ -68,14 +105,14 @@ const authSlice = createSlice({
     }
 });
 
-export const { 
-    setMode, 
-    setUser, 
-    setToken, 
-    setLoading, 
-    setError, 
-    logoutUser, 
-    invalidateToken 
+export const {
+    setMode,
+    setUser,
+    setToken,
+    setLoading,
+    setError,
+    logoutUser,
+    invalidateToken
 } = authSlice.actions;
 
 export default authSlice.reducer;

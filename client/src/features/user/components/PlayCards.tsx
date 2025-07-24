@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../app/redux/hooks";
+import { selectVariant, startFinding } from "../../../app/redux/slices/match-making.slice";
 
 const variants = [
     "bullet(1+0)",
@@ -21,6 +23,10 @@ const slideDownFade = `
 
 export function PlayCard({ type, description }: { type: string, description: string }) {
     const [showVariants, setShowVariants] = useState(false);
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+
+    }, [])
 
     // Helper to split variant string
     function parseVariant(variant: string) {
@@ -61,7 +67,11 @@ export function PlayCard({ type, description }: { type: string, description: str
                                             boxShadow: '0 2px 12px 0 rgba(52,86,228,0.10)',
                                             animation: `slideDownFade 0.5s cubic-bezier(0.4,0,0.2,1) ${(0.08 * idx + 0.1).toFixed(2)}s both`,
                                         }}
-                                        onClick={e => { e.stopPropagation(); /* handle variant selection here */ }}
+                                        onClick={e => { 
+                                            e.stopPropagation(); /* handle variant selection here */ 
+                                            dispatch(selectVariant(variant))
+                                            dispatch(startFinding())
+                                        }}
                                     >
                                         <span className="text-xs uppercase tracking-widest text-blue-200 font-semibold mb-1">{vType}</span>
                                         <span className="text-2xl font-extrabold text-white tracking-tight">{vTime}</span>
