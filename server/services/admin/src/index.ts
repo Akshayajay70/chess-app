@@ -46,11 +46,11 @@ app.use('/admin', createAdminRoutes(adminController));
 // --- Error Handler ---
 app.use(errorHandlingMiddleware);
 
-async function startDB() {
+async function start() {
     await connectDB();
     app.listen(PORT, () => {
         console.log(`🚀 Server running at http://localhost:${PORT}`)
     });
 }
 
-startDB();
+start();

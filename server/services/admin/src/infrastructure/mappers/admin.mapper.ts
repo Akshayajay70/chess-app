@@ -1,6 +1,6 @@
 import { AdminResponse } from "../../application/dtos/admin-response.ts";
 import { AdminDoc } from "../database/admin.schema.ts";
-import { isValidObjectId, Document } from "mongoose";
+import { Document } from "mongoose";
 
 export class AdminMapper {
     static toResponse(doc: Partial<AdminDoc> | Document<AdminDoc>): AdminResponse {
