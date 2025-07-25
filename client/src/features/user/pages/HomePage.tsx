@@ -6,6 +6,7 @@ import { RatingCard } from "../components/RatingCards";
 import { useAppDispatch, useAppSelector } from "../../../app/redux/hooks";
 import { fetchRating } from "../../../app/redux/slices/rating.slice";
 import { GameSpinner } from "../components/GameSpinner";
+import { GamePage } from "../../game/pages/GamePage";
 
 export function HomePage() {
     const dispatch = useAppDispatch();
@@ -16,8 +17,7 @@ export function HomePage() {
     }, [dispatch])
 
     if (matchStatus === 'finding') return <GameSpinner />
-    if (matchStatus === 'matched') return <div>Match is playing</div>
-
+    if (matchStatus === 'matched') return <GamePage />
     return (
         <div className="h-screen bg-gradient-to-br from-slate-900 to-slate-800 grid grid-cols-12 gap-4 overflow-hidden">
             {/* Sidebar */}

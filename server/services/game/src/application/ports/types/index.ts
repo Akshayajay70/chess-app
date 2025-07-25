@@ -54,3 +54,44 @@ export type MatchFindResponse = {
     blackPlayer: IPlayer,
     variant: VariantType
 }
+
+export type MoveGameRequest = {
+    gameId: string;
+    move: IMove;
+    player: IPlayer;
+};
+
+export type MoveGameResponse = {
+    success: boolean;
+    message?: string;
+    newState?: GameStateResponse;
+};
+
+export type EndGameRequest = {
+    gameId: string;
+    result: GameResultType;
+    endType: EndType;
+    winner?: IPlayer;
+    loser?: IPlayer;
+    moves: IMove[];
+};
+
+export type EndGameResponse = {
+    success: boolean;
+    message?: string;
+    finalState?: GameStateResponse;
+};
+
+export type GetGameStateRequest = {
+    gameId: string;
+};
+
+export type GameStateResponse = {
+    gameId: string;
+    players: [IPlayer, IPlayer];
+    moves: IMove[];
+    variant: VariantType;
+    status: 'ongoing' | 'ended';
+    result?: GameResultType;
+    endType?: EndType;
+};
