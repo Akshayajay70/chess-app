@@ -39,3 +39,12 @@ export interface FriendsProps {
     senderName?: string,
     receiverName?: string,
 }
+
+export type UserResponse = {
+    id: string;
+    gameId: string;
+    name: string;
+    email: string;
+    status: string;
+    createdAt: Date;
+}

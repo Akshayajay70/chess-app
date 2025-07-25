@@ -15,16 +15,12 @@ export class FriendsController {
         const {
             senderId,
             receiverId,
-            senderName,
-            receiverName,
         } = req.body
         try {
-
+            console.log(req.body)
             const result = await this.createFriendReqUC.execute({
                 senderId: senderId,
                 receiverId: receiverId,
-                senderName: senderName,
-                receiverName: receiverName
             })
             return res.json(result);
         } catch (error) {

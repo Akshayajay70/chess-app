@@ -14,14 +14,17 @@ import { errorHandlingMiddleware } from "./presentation/middlewares/error-handli
 import { config } from "./config/index.ts";
 import { GetPendingRequestsUseCase } from "./application/use-cases/get-request.uc.ts";
 import { RemovePendingRequestUseCase } from "./application/use-cases/remove-pending-req.uc.ts";
+import { CommunicationService } from "./infrastructure/axios/communication.service.ts";
 
 const friendsRepo = new FriendsRepo();
 const redisCacheService = new RedisCacheService();
 const cacheFriendHelper = new CacheFriendHelper(redisCacheService);
 const getFriendHelper = new GetFriendsHelper(redisCacheService);
+const communicationService = new CommunicationService()
 
 const createFriendReqUC = new CreateFriendReqUseCase(
-    friendsRepo
+    friendsRepo,
+    communicationService
 );
 
 const getPendingReqUC = new GetPendingRequestsUseCase(
