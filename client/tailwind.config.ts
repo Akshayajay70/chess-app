@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -29,7 +30,23 @@ const config: Config = {
             }
         },
     },
-    plugins: [],
+    plugins: [
+        plugin(function({ addUtilities }) {
+            addUtilities({
+                '.invisible-scrollbar': {
+                    'scrollbar-width': 'thin',
+                    'scrollbar-color': 'transparent transparent',
+                },
+                '.invisible-scrollbar::-webkit-scrollbar': {
+                    'width': '6px',
+                    'background': 'transparent',
+                },
+                '.invisible-scrollbar::-webkit-scrollbar-thumb': {
+                    'background': 'transparent',
+                },
+            });
+        })
+    ],
 }
 
 export default config
