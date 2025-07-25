@@ -8,7 +8,7 @@ export class FriendsRepo implements IFriendsRepo {
         try {
             await FriendsModel.create({
                 senderId: data.senderId,
-                senderName: data.receiverId,
+                senderName: data.senderName,
                 receiverId: data.receiverId,
                 receiverName: data.receiverName,
                 status: 'pending'

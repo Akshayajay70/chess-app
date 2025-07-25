@@ -19,6 +19,14 @@ export class CreateFriendReqUseCase implements ICreateFriendReqUseCase {
                 }
             }
 
+            const existingReq = await this.friendsRepo.friendStatus(data);
+            if(existingReq) {
+                return {
+                    success: false,
+                    message: 'Request already exists'
+                }
+            }
+
             // Create new friend request
             const friendData = await this.friendsRepo.createFriendRequest(data);
             if (!friendData) return {

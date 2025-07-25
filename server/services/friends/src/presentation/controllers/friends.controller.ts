@@ -52,8 +52,8 @@ export class FriendsController {
             const senderId = req.headers['x-game-id'];
 
             const result = await this.removeRequestUC.execute({
-                senderId: String(senderId),
-                receiverId: receiverId
+                receiverId: String(senderId),
+                senderId: receiverId
             })
 
             return res.json(result)
