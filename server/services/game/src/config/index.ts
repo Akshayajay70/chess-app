@@ -8,6 +8,7 @@ type AppConfig = {
     frontendUrl: string;
     kafkaUrl: string;
     mongoUrl: string;
+    redisUrl: string;
 }
 
 export const config: AppConfig = {
@@ -16,4 +17,5 @@ export const config: AppConfig = {
     frontendUrl: process.env.FRONTEND_URL as string,
     kafkaUrl: process.env.KAFKA_URL as string,
     mongoUrl: process.env.MONGO_URL as string,
+    redisUrl: process.env.REDIS_URL as string,
 }

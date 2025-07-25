@@ -1,4 +1,4 @@
-import { MatchFindRequest, MatchFindResponse } from "../../../application/ports/types/index.ts";
+import { GameStateResponse, MatchFindRequest, MatchFindResponse } from "../../../application/ports/types/index.ts";
 import { IGameRepo } from "../../../application/ports/interfaces/game.repository.interface.ts";
 import { GameModel } from "../models/game.model.ts";
 import { DatabaseError } from "../../../domain/errors/database.error.ts";
@@ -37,6 +37,30 @@ export class GameRepo implements IGameRepo {
                 "Game",
                 error instanceof Error ? error : undefined
             )
+        }
+    }
+
+    async saveFinalState(input: GameStateResponse): Promise<void> {
+        try {
+            await GameModel.updateOne(
+                { _id: input.gameId },
+                {
+                    $set: {
+                        moves: input.moves,
+                        result: input.result,
+                        endType: input.endType,
+                        status: input.status,
+                        variant: input.variant,
+                        players: input.players
+                    }
+                }
+            );
+        } catch (error) {
+            throw new DatabaseError(
+                "UPDATE",
+                "Game",
+                error instanceof Error ? error : undefined
+            );
         }
     }
 }

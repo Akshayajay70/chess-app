@@ -156,6 +156,9 @@ importers:
       mongoose:
         specifier: ^8.16.3
         version: 8.16.4
+      redis:
+        specifier: ^5.6.1
+        version: 5.6.1
       socket.io:
         specifier: ^4.8.1
         version: 4.8.1
@@ -207,8 +210,6 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
-<<<<<<< Updated upstream
-=======
   server/services/rating:
     dependencies:
       dotenv:
@@ -240,7 +241,6 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
->>>>>>> Stashed changes
   server/services/user:
     dependencies:
       cookie-parser:
