@@ -59,37 +59,45 @@ export const MoveContainer: React.FC = () => {
           {rows.map((row, index) => (
             <div
               key={index}
-              className={`grid grid-cols-6 gap-3 px-3 py-3 transition-all duration-200
+              className={`flex flex-row gap-4 px-8 py-3 transition-all duration-200
                 hover:bg-white/10 cursor-pointer
                 ${hoveredRow === index ? "bg-white/10 shadow-lg" : ""}
                 ${index % 2 === 0 ? "bg-white/2" : ""}`}
               onMouseEnter={() => setHoveredRow(index)}
               onMouseLeave={() => setHoveredRow(null)}
             >
-              {/* num1 */}
-              <div className="text-white/60 font-bold text-sm flex items-center justify-center min-w-[2ch]">
-                {row.num1 ? `${row.num1}.` : ''}
-              </div>
-              {/* white1 */}
-              <div className="text-center text-white font-semibold bg-white/5 rounded-lg py-1 px-2 border border-white/10 min-w-[8ch]">
-                {row.white1 || ''}
-              </div>
-              {/* black1 */}
-              <div className="text-center text-white font-semibold bg-black/20 rounded-lg py-1 px-2 border border-white/10 min-w-[8ch]">
-                {row.black1 || ''}
-              </div>
-              {/* num2 */}
-              <div className="text-white/60 font-bold text-sm flex items-center justify-center min-w-[4ch]">
-                {row.num2 ? `${row.num2}.` : ''}
-              </div>
-              {/* white2 */}
-              <div className="text-center text-white font-semibold bg-white/5 rounded-lg py-1 px-2 border border-white/10 min-w-[8ch]">
-                {row.white2 || ''}
-              </div>
-              {/* black2 */}
-              <div className="text-center text-white font-semibold bg-black/20 rounded-lg py-1 px-2 border border-white/10 min-w-[8ch]">
-                {row.black2 || ''}
-              </div>
+              {/* num1 and white1/black1 */}
+              {row.num1 && (
+                <div className="text-white/60 font-bold text-sm flex items-center justify-center min-w-[2ch]">
+                  {`${row.num1}.`}
+                </div>
+              )}
+              {row.white1 && (
+                <div className="text-center text-white font-semibold bg-white/5 rounded-lg py-1 px-2 border border-white/10 min-w-[8ch]">
+                  {row.white1}
+                </div>
+              )}
+              {row.black1 && (
+                <div className="text-center text-white font-semibold bg-black/20 rounded-lg py-1 px-2 border border-white/10 min-w-[8ch]">
+                  {row.black1}
+                </div>
+              )}
+              {/* num2 and white2/black2 */}
+              {row.num2 && (
+                <div className="text-white/60 font-bold text-sm flex items-center justify-center min-w-[2ch]">
+                  {`${row.num2}.`}
+                </div>
+              )}
+              {row.white2 && (
+                <div className="text-center text-white font-semibold bg-white/5 rounded-lg py-1 px-2 border border-white/10 min-w-[8ch]">
+                  {row.white2}
+                </div>
+              )}
+              {row.black2 && (
+                <div className="text-center text-white font-semibold bg-black/20 rounded-lg py-1 px-2 border border-white/10 min-w-[8ch]">
+                  {row.black2}
+                </div>
+              )}
             </div>
           ))}
         </div>
