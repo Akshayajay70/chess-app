@@ -9,7 +9,8 @@ export class MoveGameUseCase implements IMoveGame {
 
     async execute(input: MoveGameRequest): Promise<MoveGameResponse> {
         // Get current game state from cache
-        const state = await this.cache.getGameState(input.gameId);
+        const state = await this.cache.getGameState(input.matchRoomId);
+        console.log(state)
         if (!state || state.status !== 'ongoing') {
             return { success: false, message: 'Game not found or already ended' };
         }
@@ -17,7 +18,7 @@ export class MoveGameUseCase implements IMoveGame {
         const newMoves = [...state.moves, input.move];
         const newState: GameStateResponse = { ...state, moves: newMoves };
         // Save updated state to cache
-        await this.cache.setGameState(input.gameId, newState);
+        await this.cache.setGameState(input.matchRoomId, newState);
         return { success: true, newState };
     }
 } 

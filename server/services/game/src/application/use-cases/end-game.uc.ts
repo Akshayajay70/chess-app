@@ -11,7 +11,7 @@ export class EndGameUseCase implements IEndGame {
 
     async execute(input: EndGameRequest): Promise<EndGameResponse> {
         // Get current game state from cache
-        const state = await this.cache.getGameState(input.gameId);
+        const state = await this.cache.getGameState(input.matchRoomId);
         if (!state || state.status !== 'ongoing') {
             return { success: false, message: 'Game not found or already ended' };
         }
@@ -25,7 +25,7 @@ export class EndGameUseCase implements IEndGame {
         // Persist to DB
         await this.gameRepo.saveFinalState(finalState);
         // Remove from cache
-        await this.cache.deleteGameState(input.gameId);
+        await this.cache.deleteGameState(input.matchRoomId);
         return { success: true, finalState };
     }
 } 

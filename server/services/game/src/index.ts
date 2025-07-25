@@ -15,9 +15,14 @@ import { GetGameStateUseCase } from './application/use-cases/get-game-state.uc.t
 import { GameStateCacheRedis } from './infrastructure/service/game-state-cache.redis.ts';
 import { GameSocketController } from './presentation/controllers/socket.controller.ts';
 
-const gameRepo = new GameRepo()
-const createGameUseCase = new CreateGameUseCase(gameRepo)
-const gameController = new GameController(createGameUseCase)
+const gameRepo = new GameRepo();
+const cache = new GameStateCacheRedis();
+const createGameUseCase = new CreateGameUseCase(gameRepo, cache);
+const gameController = new GameController(createGameUseCase);
+const moveGame = new MoveGameUseCase(cache);
+const endGame = new EndGameUseCase(cache, gameRepo);
+const getGameState = new GetGameStateUseCase(cache);
+const gameSocketController = new GameSocketController(moveGame, endGame, getGameState);
 
 const app = express();
 const server = createServer(app);
@@ -31,6 +36,7 @@ const io = new Server(server, {
 
 // --- Middleware ---
 app.use(express.json());
+app.use(express.urlencoded());
 
 // --- Route Binding ---
 app.use('/game', createGameRoutes(gameController));
@@ -38,12 +44,9 @@ app.use('/game', createGameRoutes(gameController));
 // --- Error Handler ---
 app.use(errorHandlingMiddleware);
 
-const cache = new GameStateCacheRedis();
-const moveGame = new MoveGameUseCase(cache);
-const endGame = new EndGameUseCase(cache, gameRepo);
-const getGameState = new GetGameStateUseCase(cache);
-const gameSocketController = new GameSocketController(moveGame, endGame, getGameState);
-gameSocketController.registerHandlers(io);
+io.on('connection', (socket) => {
+    gameSocketController.handleConnection(socket);
+});
 
 async function start() {
     await connectDB();

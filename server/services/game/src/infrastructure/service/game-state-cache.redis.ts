@@ -18,14 +18,16 @@ redisClient.on('error', (err) => console.error('Redis Client Error', err));
 })();
 
 export class GameStateCacheRedis implements IGameStateCache {
-    async setGameState(gameId: string, state: GameStateResponse): Promise<void> {
-        await redisClient.set(`game:${gameId}`, JSON.stringify(state));
+    async setGameState(matchRoomId: string, state: GameStateResponse): Promise<void> {
+        console.log(matchRoomId, state)
+        await redisClient.set(`game:${matchRoomId}`, JSON.stringify(state));
     }
-    async getGameState(gameId: string): Promise<GameStateResponse | null> {
-        const data = await redisClient.get(`game:${gameId}`);
+    async getGameState(matchRoomId: string): Promise<GameStateResponse | null> {
+        console.log('redis', matchRoomId)
+        const data = await redisClient.get(`game:${matchRoomId}`);
         return data ? JSON.parse(data) as GameStateResponse : null;
     }
-    async deleteGameState(gameId: string): Promise<void> {
-        await redisClient.del(`game:${gameId}`);
+    async deleteGameState(matchRoomId: string): Promise<void> {
+        await redisClient.del(`game:${matchRoomId}`);
     }
 } 

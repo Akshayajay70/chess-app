@@ -43,7 +43,7 @@ export class GameRepo implements IGameRepo {
     async saveFinalState(input: GameStateResponse): Promise<void> {
         try {
             await GameModel.updateOne(
-                { _id: input.gameId },
+                { _id: input.matchRoomId },
                 {
                     $set: {
                         moves: input.moves,

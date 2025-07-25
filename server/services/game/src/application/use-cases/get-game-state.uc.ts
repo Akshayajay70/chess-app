@@ -8,6 +8,7 @@ export class GetGameStateUseCase implements IGetGameState {
     ) {}
 
     async execute(input: GetGameStateRequest): Promise<GameStateResponse | null> {
-        return await this.cache.getGameState(input.gameId);
+        console.log('usecase',input)
+        return await this.cache.getGameState(input.matchRoomId);
     }
 } 

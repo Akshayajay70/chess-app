@@ -56,7 +56,7 @@ export type MatchFindResponse = {
 }
 
 export type MoveGameRequest = {
-    gameId: string;
+    matchRoomId: string;
     move: IMove;
     player: IPlayer;
 };
@@ -68,7 +68,7 @@ export type MoveGameResponse = {
 };
 
 export type EndGameRequest = {
-    gameId: string;
+    matchRoomId: string;
     result: GameResultType;
     endType: EndType;
     winner?: IPlayer;
@@ -83,11 +83,11 @@ export type EndGameResponse = {
 };
 
 export type GetGameStateRequest = {
-    gameId: string;
+    matchRoomId: string;
 };
 
 export type GameStateResponse = {
-    gameId: string;
+    matchRoomId: string;
     players: [IPlayer, IPlayer];
     moves: IMove[];
     variant: VariantType;
