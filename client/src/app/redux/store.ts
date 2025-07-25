@@ -7,6 +7,7 @@ import matchMakingReducer from './slices/match-making.slice';
 import ratingReducer from './slices/rating.slice';
 import matchmakingMiddleware from "./middlewares/match-making.mw";
 import gameReducer from './slices/game.slice'
+import friendsReducer from './slices/friends.slice'
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
         adminUserMan: userManReducer,
         matchMaking: matchMakingReducer,
         rating: ratingReducer,
-        game: gameReducer
+        game: gameReducer,
+        friends: friendsReducer
     },
     middleware: (getDefaultMiddleware) => {
         const middlewares = getDefaultMiddleware({

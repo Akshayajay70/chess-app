@@ -46,5 +46,9 @@ app.use('/rating', verifyToken('user'), createProxyMiddleware({
     changeOrigin: true
 }));
 
+app.use('/friends', verifyToken('user'), createProxyMiddleware({
+    target: 'http://localhost:8006/friends',
+    changeOrigin: true
+}));
 
 app.listen(PORT, () => console.log(`Gateway is running on Port: ${PORT}`));

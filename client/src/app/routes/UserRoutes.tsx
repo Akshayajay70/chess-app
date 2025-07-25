@@ -10,6 +10,7 @@ import { useAppSelector } from "../redux/hooks";
 import type { RootState } from "../redux/store";
 import { HomePage } from "../../features/user/pages/HomePage"
 import { GamePage } from "../../features/game/pages/GamePage"
+import { FriendsPage } from "../../features/friends/pages/FriendsPage"
 
 function AdminProtectedRoutes() {
     const isAuthenticated = useAppSelector((state: RootState) => state.adminAuth.isAuthenticated);
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> }
         ]
+    },
+    {
+        path: '/friends',
+        element: <FriendsPage />,
     },
     {
         path: '/game',
