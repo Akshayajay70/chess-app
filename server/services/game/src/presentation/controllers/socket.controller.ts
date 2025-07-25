@@ -1,19 +1,35 @@
 import { Socket } from 'socket.io';
-import { IMoveGame, IEndGame, IGetGameState } from '../../application/ports/interfaces/use-case.interface.ts';
+import { IMoveGame, IEndGame, IGetGameState, IJoinGame } from '../../application/ports/interfaces/use-case.interface.ts';
 
 export class GameSocketController {
     constructor(
         private readonly moveGame: IMoveGame,
         private readonly endGame: IEndGame,
-        private readonly getGameState: IGetGameState
+        private readonly getGameState: IGetGameState,
+        private readonly joinGame: IJoinGame
     ) { }
 
     handleConnection(socket: Socket) {
         console.log(socket.id);
+
+        // Join a game room using the joinGame use-case
+        socket.on('join_game', async (data, callback) => {
+            try {
+                const result = await this.joinGame.execute(data);
+                if (result.success) {
+                    socket.join(data.matchRoomId);
+                    console.log(`Socket ${socket.id} joined room ${data.matchRoomId}`);
+                    callback({ success: true, message: 'Joined game successfully.' });
+                }
+            } catch (error) {
+                callback({ success: false, error: error instanceof Error ? error.message : 'Unknown error' });
+            }
+        });
+
         // Make move and broadcast to opponent
         socket.on('make_move', async (data) => {
             try {
-                console.log('make_move', data);
+                console.log('data', data)
                 const result = await this.moveGame.execute(data);
                 // Broadcast the move to the opponent (everyone else in the room)
                 socket.to(data.matchRoomId).emit('opponent_move', result);

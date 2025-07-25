@@ -95,3 +95,11 @@ export type GameStateResponse = {
     result?: GameResultType;
     endType?: EndType;
 };
+
+export type JoinGameRequest = {
+    matchRoomId: string;
+};
+
+export type JoinGameResponse = {
+    success: boolean;
+};

@@ -14,6 +14,7 @@ import { EndGameUseCase } from './application/use-cases/end-game.uc.ts';
 import { GetGameStateUseCase } from './application/use-cases/get-game-state.uc.ts';
 import { GameStateCacheRedis } from './infrastructure/service/game-state-cache.redis.ts';
 import { GameSocketController } from './presentation/controllers/socket.controller.ts';
+import { JoinGameUseCase } from './application/use-cases/join-game.uc.ts';
 
 const gameRepo = new GameRepo();
 const cache = new GameStateCacheRedis();
@@ -22,7 +23,8 @@ const gameController = new GameController(createGameUseCase);
 const moveGame = new MoveGameUseCase(cache);
 const endGame = new EndGameUseCase(cache, gameRepo);
 const getGameState = new GetGameStateUseCase(cache);
-const gameSocketController = new GameSocketController(moveGame, endGame, getGameState);
+const joinGame = new JoinGameUseCase(cache, gameRepo);
+const gameSocketController = new GameSocketController(moveGame, endGame, getGameState, joinGame);
 
 const app = express();
 const server = createServer(app);

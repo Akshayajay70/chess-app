@@ -1,4 +1,4 @@
-import { EndGameRequest, EndGameResponse, GameStateResponse, GetGameStateRequest, MatchFindRequest, MatchFindResponse, MoveGameRequest, MoveGameResponse } from "../types/index.ts";
+import { EndGameRequest, EndGameResponse, GameStateResponse, GetGameStateRequest, MatchFindRequest, MatchFindResponse, MoveGameRequest, MoveGameResponse, JoinGameRequest, JoinGameResponse } from "../types/index.ts";
 
 export interface ICreateGame {
     execute(input: MatchFindRequest): Promise<MatchFindResponse>
@@ -14,4 +14,8 @@ export interface IEndGame {
 
 export interface IGetGameState {
     execute(input: GetGameStateRequest): Promise<GameStateResponse | null>;
+}
+
+export interface IJoinGame {
+    execute(input: JoinGameRequest): Promise<JoinGameResponse>;
 }

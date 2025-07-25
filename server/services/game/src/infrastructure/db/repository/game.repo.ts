@@ -48,10 +48,7 @@ export class GameRepo implements IGameRepo {
                     $set: {
                         moves: input.moves,
                         result: input.result,
-                        endType: input.endType,
-                        status: input.status,
-                        variant: input.variant,
-                        players: input.players
+                        endType: input.endType
                     }
                 }
             );
@@ -62,5 +59,32 @@ export class GameRepo implements IGameRepo {
                 error instanceof Error ? error : undefined
             );
         }
+    }
+
+    async find(matchRoomId: string): Promise<GameStateResponse | null> {
+        const game = await GameModel.findOne({ _id: matchRoomId });
+        if (!game) return null;
+
+        // Map DB fields to GameStateResponse
+        return {
+            matchRoomId: game._id.toString(),
+            players: [
+                {
+                    gameId: game.whitePlayer.gameId,
+                    name: game.whitePlayer.name,
+                    rating: game.whitePlayer.rating
+                },
+                {
+                    gameId: game.blackPlayer.gameId,
+                    name: game.blackPlayer.name,
+                    rating: game.blackPlayer.rating
+                }
+            ],
+            moves: game.moves,
+            variant: game.varientName,
+            status: game.result ? 'ended': 'ongoing',
+            result: game.result ?? undefined,
+            endType: game.endType
+        };
     }
 }
