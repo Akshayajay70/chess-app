@@ -24,13 +24,13 @@ export class UpdateFriendUseCase implements IUpdateFriendUseCase{
 
             const result = await this.friendsRepo.updateFriend({ senderId, receiverId, status });
 
-            const individualFriendKey = this.cacheFriendService.generateCacheKey(senderId, receiverId);
-            const paginatedFriendListKeys = await this.cacheGetFriends.getKeys(senderId);
+            // const individualFriendKey = this.cacheFriendService.generateCacheKey(senderId, receiverId);
+            // const paginatedFriendListKeys = await this.cacheGetFriends.getKeys(senderId);
 
-            await Promise.all([
-                this.cacheFriendService.delCacheData(individualFriendKey),
-                this.cacheGetFriends.delFriends(paginatedFriendListKeys)
-            ]);
+            // await Promise.all([
+            //     this.cacheFriendService.delCacheData(individualFriendKey),
+            //     this.cacheGetFriends.delFriends(paginatedFriendListKeys)
+            // ]);
 
             return {
                 success: result.success,

@@ -8,8 +8,8 @@ export interface IGetPendingRequestsUseCase {
     execute(id: string): Promise<PendingReqOutput[]>
 }
 
-export interface IRemovePendingRequestUseCase {
-    execute(data: FriendInput): Promise<FriendOuput>
+export interface IUpdateRequestUseCase {
+    execute(data: FriendsProps): Promise<FriendOuput>
 }
 
 export interface IGetConnectionsUseCase {

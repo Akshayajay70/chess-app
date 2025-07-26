@@ -22,11 +22,11 @@ export class RemoveFriendUseCase implements IRemoveFriendUseCase{
                 };
             }
 
-            const individualFriendKey = this.cacheFriendService.generateCacheKey(senderId, receiverId);
-            const paginatedFriendListKeys = await this.cacheGetFriends.getKeys(senderId);
+            // const individualFriendKey = this.cacheFriendService.generateCacheKey(senderId, receiverId);
+            // const paginatedFriendListKeys = await this.cacheGetFriends.getKeys(senderId);
 
-            await this.cacheFriendService.delCacheData(individualFriendKey);
-            await this.cacheGetFriends.delFriends(paginatedFriendListKeys);
+            // await this.cacheFriendService.delCacheData(individualFriendKey);
+            // await this.cacheGetFriends.delFriends(paginatedFriendListKeys);
 
             return {
                 success: true,

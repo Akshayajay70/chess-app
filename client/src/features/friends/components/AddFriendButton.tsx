@@ -16,14 +16,14 @@ export function AddFriendButton() {
         try {
             if (!user) throw new Error("User not authenticated");
             await dispatch(sendFriendRequest({ 
-                receiverId: gameId.trim(), 
-                receiverName: user.name || "Unknown User"
+                receiverId: gameId.trim()
             })).unwrap();
             
             setGameId("");
             setIsExpanded(false);
-        } catch (error) {
+        } catch (error: any) {
             console.error("Failed to send friend request:", error);
+            // Error will be handled by the notification component
         } finally {
             setIsLoading(false);
         }

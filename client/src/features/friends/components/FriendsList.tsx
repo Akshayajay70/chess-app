@@ -11,7 +11,7 @@ export function FriendsList({ connections, loading }: FriendsListProps) {
     const dispatch = useAppDispatch();
 
     const handleRemoveFriend = (friendId: string) => {
-        dispatch(removeFriend({ otherUserId: friendId }));
+        dispatch(removeFriend({ friendId }));
     };
 
     const handlePlayWithFriend = (friendId: string) => {
@@ -52,7 +52,7 @@ export function FriendsList({ connections, loading }: FriendsListProps) {
                             </div>
                             <div className="flex flex-col">
                                 <div className="text-white font-semibold text-lg">{friend.name}</div>
-                                <div className="text-slate-300 text-sm">Status: {friend.status}</div>
+                                <div className="text-slate-300 text-sm">Game ID: {friend.id}</div>
                             </div>
                         </div>
                         <div className="flex gap-2">

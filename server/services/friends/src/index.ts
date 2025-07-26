@@ -13,7 +13,7 @@ import { UpdateFriendUseCase } from "./application/use-cases/update-friend.uc.ts
 import { errorHandlingMiddleware } from "./presentation/middlewares/error-handling.ts";
 import { config } from "./config/index.ts";
 import { GetPendingRequestsUseCase } from "./application/use-cases/get-request.uc.ts";
-import { RemovePendingRequestUseCase } from "./application/use-cases/remove-pending-req.uc.ts";
+import { UpdateRequestUseCase } from "./application/use-cases/update-pending-req.uc.ts";
 import { CommunicationService } from "./infrastructure/axios/communication.service.ts";
 
 const friendsRepo = new FriendsRepo();
@@ -31,7 +31,7 @@ const getPendingReqUC = new GetPendingRequestsUseCase(
     friendsRepo
 )
 
-const removeRequestUC = new RemovePendingRequestUseCase(
+const updateRequestUC = new UpdateRequestUseCase(
     friendsRepo
 )
 
@@ -55,7 +55,7 @@ const updateFriendUC = new UpdateFriendUseCase(
 const friendsController = new FriendsController(
     createFriendReqUC,
     getPendingReqUC,
-    removeRequestUC,
+    updateRequestUC,
     getConnectionsUC,
     removeFriendUC,
     updateFriendUC

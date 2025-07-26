@@ -1,6 +1,6 @@
 import { IFriendsRepo } from "../application/ports/interfaces/friends-repo";
 import { FriendsModel } from "./friends.model";
-import { ReturnData, FriendsProps, DBReturnData, PendingReqOutput, FriendInput } from "../application/ports/types";
+import { ReturnData, FriendsProps, DBReturnData, PendingReqOutput } from "../application/ports/types";
 import { DatabaseError } from "../domain/errors/database.error";
 
 export class FriendsRepo implements IFriendsRepo {
@@ -51,18 +51,20 @@ export class FriendsRepo implements IFriendsRepo {
         }
     }
 
-    async removeRequest(data: FriendInput): Promise<boolean> {
+    async updateRequest(data: FriendsProps): Promise<boolean> {
         try {
             const { senderId, receiverId } = data;
-            const response = await FriendsModel.deleteOne({
-                senderId: senderId,
-                receiverId: receiverId
-            });
+            const response = await FriendsModel.updateOne({
+                $or: [
+                    { senderId, receiverId },
+                    { senderId: receiverId, receiverId: senderId }
+                ]
+            }, { $set: { status: data.status } });
 
-            return response.deletedCount === 1
+            return response.matchedCount === 1
         } catch (error) {
             throw new DatabaseError(
-                'DELETE',
+                'UPDATE',
                 'Friends',
                 error instanceof Error
                     ? error
@@ -88,7 +90,7 @@ export class FriendsRepo implements IFriendsRepo {
             };
         } catch (error) {
             throw new DatabaseError(
-                'CREATE',
+                'READ',
                 'Friends',
                 error instanceof Error
                     ? error

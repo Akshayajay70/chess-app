@@ -1,11 +1,11 @@
-import { ICreateFriendReqUseCase, IGetConnectionsUseCase, IGetPendingRequestsUseCase, IRemoveFriendUseCase, IUpdateFriendUseCase, IRemovePendingRequestUseCase } from "@/application/ports/interfaces/use-case.interface";
+import { ICreateFriendReqUseCase, IGetConnectionsUseCase, IGetPendingRequestsUseCase, IRemoveFriendUseCase, IUpdateFriendUseCase, IUpdateRequestUseCase } from "@/application/ports/interfaces/use-case.interface";
 import { Request, Response, NextFunction } from "express";
 
 export class FriendsController {
     constructor(
         private createFriendReqUC: ICreateFriendReqUseCase,
         private getPendingReqUC: IGetPendingRequestsUseCase,
-        private removeRequestUC: IRemovePendingRequestUseCase,
+        private updateRequestUC: IUpdateRequestUseCase,
         private getConnectionsUC: IGetConnectionsUseCase,
         private removeFriendUC: IRemoveFriendUseCase,
         private updateFriendUC: IUpdateFriendUseCase
@@ -42,14 +42,16 @@ export class FriendsController {
         }
     }
 
-    async removeRequest(req: Request, res: Response, next: NextFunction) {
+    async updateRequest(req: Request, res: Response, next: NextFunction) {
         try {
             const receiverId = req.params.id;
             const senderId = req.headers['x-game-id'];
+            const { status } = req.body
 
-            const result = await this.removeRequestUC.execute({
+            const result = await this.updateRequestUC.execute({
                 receiverId: String(senderId),
-                senderId: receiverId
+                senderId: receiverId,
+                status: status
             })
 
             return res.json(result)
@@ -81,14 +83,12 @@ export class FriendsController {
     }
 
     async removeFriend(req: Request, res: Response, next: NextFunction) {
-        const {
-            senderId,
-            receiverId
-        } = req.body;
+        const senderId = req.headers['x-game-id']
+        const receiverId = req.params.id
 
         try {
             const result = await this.removeFriendUC.execute(
-                senderId,
+                String(senderId),
                 receiverId
             )
 

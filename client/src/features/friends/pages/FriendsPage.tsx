@@ -3,27 +3,37 @@ import { SideBar } from "../../../shared/components/Sidebar";
 import { FriendsList } from "../components/FriendsList";
 import { PendingRequests } from "../components/PendingRequests";
 import { AddFriendButton } from "../components/AddFriendButton";
+import { Notification } from "../components/Notification";
 import { useAppDispatch, useAppSelector } from "../../../app/redux/hooks";
-import { fetchConnections, fetchPendingRequests } from "../../../app/redux/slices/friends.slice";
+import { fetchConnections, fetchPendingRequests, refreshFriendsData } from "../../../app/redux/slices/friends.slice";
 
 export function FriendsPage() {
     const dispatch = useAppDispatch();
-    const { connections, pendingRequests, loading, error } = useAppSelector(state => state.friends);
+    const { connections, pendingRequests, loading, successMessage } = useAppSelector(state => state.friends);
     const [activeTab, setActiveTab] = useState<'friends' | 'requests'>('friends');
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
-        dispatch(fetchConnections());
+        dispatch(fetchConnections({}));
         dispatch(fetchPendingRequests());
     }, [dispatch]);
 
-    const filteredConnections = connections.filter(friend =>
+    // Handle automatic refresh after successful operations
+    useEffect(() => {
+        if (successMessage === 'Friend request accepted!') {
+            dispatch(fetchConnections({}));
+        }
+    }, [successMessage, dispatch]);
+
+    const filteredConnections = (connections || []).filter(friend =>
         friend.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         friend.id.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
-        <div className="h-screen bg-gradient-to-br from-slate-900 to-slate-800 grid grid-cols-12 gap-4 overflow-hidden">
+        <>
+            <Notification />
+            <div className="h-screen bg-gradient-to-br from-slate-900 to-slate-800 grid grid-cols-12 gap-4 overflow-hidden">
             {/* Sidebar */}
             <div className="col-span-2 h-full">
                 <SideBar />
@@ -42,7 +52,7 @@ export function FriendsPage() {
                                         : 'bg-[#39398c] text-slate-300 hover:text-white hover:bg-[#4040a0]'
                                     }`}
                             >
-                                Friends ({connections.length})
+                                Friends ({(connections || []).length})
                             </button>
                             <button
                                 onClick={() => setActiveTab('requests')}
@@ -51,7 +61,7 @@ export function FriendsPage() {
                                         : 'bg-[#39398c] text-slate-300 hover:text-white hover:bg-[#4040a0]'
                                     }`}
                             >
-                                Requests ({pendingRequests.length})
+                                Requests ({(pendingRequests || []).length})
                             </button>
                         </div>
                         <AddFriendButton />
@@ -95,5 +105,6 @@ export function FriendsPage() {
                 </div>
             </div>
         </div>
+        </>
     );
 } 

@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../app/redux/hooks";
-import { acceptFriendRequest, declineFriendRequest, removePendingRequest } from "../../../app/redux/slices/friends.slice";
+import { acceptFriendRequest, declineFriendRequest } from "../../../app/redux/slices/friends.slice";
 import type { FriendRequest } from "../../../app/redux/slices/friends.slice";
 
 interface PendingRequestsProps {
@@ -11,15 +11,11 @@ export function PendingRequests({ requests, loading }: PendingRequestsProps) {
     const dispatch = useAppDispatch();
 
     const handleAcceptRequest = (senderId: string) => {
-        dispatch(acceptFriendRequest({ otherUserId: senderId }));
+        dispatch(acceptFriendRequest({ senderId }));
     };
 
     const handleDeclineRequest = (senderId: string) => {
-        dispatch(declineFriendRequest({ otherUserId: senderId }));
-    };
-
-    const handleRemoveRequest = (senderId: string) => {
-        dispatch(removePendingRequest({ otherUserId: senderId }));
+        dispatch(declineFriendRequest({ senderId }));
     };
 
     if (loading) {
@@ -46,7 +42,7 @@ export function PendingRequests({ requests, loading }: PendingRequestsProps) {
             <div className="flex-1 overflow-y-auto space-y-4">
                 {requests.map((request) => (
                     <div
-                        key={`${request.senderId}-${request.receiverId}`}
+                        key={request.senderId}
                         className="bg-[#3456e4] rounded-2xl p-4 flex items-center justify-between shadow-lg hover:bg-[#4666f6] transition-all duration-300"
                     >
                         <div className="flex items-center gap-4">
@@ -55,7 +51,7 @@ export function PendingRequests({ requests, loading }: PendingRequestsProps) {
                             </div>
                             <div className="flex flex-col">
                                 <div className="text-white font-semibold text-lg">{request.senderName}</div>
-                                <div className="text-slate-300 text-sm">Wants to be your friend</div>
+                                <div className="text-slate-300 text-sm">Game ID: {request.senderId}</div>
                             </div>
                         </div>
                         <div className="flex gap-2">
@@ -70,12 +66,6 @@ export function PendingRequests({ requests, loading }: PendingRequestsProps) {
                                 className="px-4 py-2 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-all duration-300 hover:scale-105"
                             >
                                 Decline
-                            </button>
-                            <button
-                                onClick={() => handleRemoveRequest(request.senderId)}
-                                className="px-4 py-2 bg-[#25336a] text-white rounded-xl font-semibold hover:bg-[#2d3e7a] transition-all duration-300 hover:scale-105"
-                            >
-                                Remove
                             </button>
                         </div>
                     </div>
