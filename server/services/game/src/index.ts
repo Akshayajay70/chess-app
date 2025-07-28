@@ -32,7 +32,10 @@ const { port: PORT } = config;
 
 const io = new Server(server, {
     cors: {
-        origin: '*'
+        origin: [config.frontendUrl, "http://localhost:5173", "http://localhost:3000", "http://localhost:4173"],
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"]
     }
 });
 

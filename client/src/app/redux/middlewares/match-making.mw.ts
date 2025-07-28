@@ -5,7 +5,27 @@ import {
     matchError,
     setSocketConnected,
     startFinding,
+    type VariantType,
 } from "../slices/match-making.slice";
+import {
+    setGameState
+} from "../slices/game.slice"
+
+type MatchRoom = {
+  matchRoomId: string;
+  whitePlayer: {
+    gameId: string;
+    name: string;
+    rating: number;
+  };
+  blackPlayer: {
+    gameId: string;
+    name: string;
+    rating: number;
+  };
+  variant: VariantType;
+};
+
 
 const matchmakingSocketMiddleware: Middleware = (store) => {
     const socket = connectSocket();
@@ -18,8 +38,13 @@ const matchmakingSocketMiddleware: Middleware = (store) => {
         store.dispatch(setSocketConnected(false));
     });
 
-    socket.on('match_found', (data: { matchRoomId: string }) => {
+    socket.on('match_found', (data: MatchRoom) => {
         localStorage.setItem('match_details', JSON.stringify(data));
+        store.dispatch(setGameState({
+            matchRoomId: data.matchRoomId,
+            players: [data.whitePlayer, data.blackPlayer],
+            variant: data.variant
+        }))
         store.dispatch(matchFound(data.matchRoomId));
     });
 

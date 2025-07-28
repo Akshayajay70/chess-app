@@ -5,7 +5,7 @@ import { PendingRequests } from "../components/PendingRequests";
 import { AddFriendButton } from "../components/AddFriendButton";
 import { Notification } from "../components/Notification";
 import { useAppDispatch, useAppSelector } from "../../../app/redux/hooks";
-import { fetchConnections, fetchPendingRequests, refreshFriendsData } from "../../../app/redux/slices/friends.slice";
+import { fetchConnections, fetchPendingRequests } from "../../../app/redux/slices/friends.slice";
 
 export function FriendsPage() {
     const dispatch = useAppDispatch();

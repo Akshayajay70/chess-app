@@ -7,6 +7,7 @@ import matchMakingReducer from './slices/match-making.slice';
 import ratingReducer from './slices/rating.slice';
 import matchmakingMiddleware from "./middlewares/match-making.mw";
 import gameReducer from './slices/game.slice'
+import gameSocketMiddleware from "./middlewares/game-socket.mw";
 import friendsReducer from './slices/friends.slice'
 
 export const store = configureStore({
@@ -22,7 +23,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => {
         const middlewares = getDefaultMiddleware({
             serializableCheck: false,
-        }).concat(matchmakingMiddleware);
+        }).concat(matchmakingMiddleware, gameSocketMiddleware);
 
         if (import.meta.env.VITE_ENV_MODE === 'development') {
             middlewares.push(loggerMiddleware);

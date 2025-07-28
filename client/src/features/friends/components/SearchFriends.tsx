@@ -10,7 +10,7 @@ export function SearchFriends() {
 
     const handleSearch = async () => {
         if (!searchQuery.trim()) return;
-        
+
         setIsSearching(true);
         // TODO: Implement actual search API call
         // For now, we'll simulate search results
@@ -19,7 +19,7 @@ export function SearchFriends() {
                 { id: "1", name: "John Doe", gameId: "john123" },
                 { id: "2", name: "Jane Smith", gameId: "jane456" },
                 { id: "3", name: "Bob Wilson", gameId: "bob789" },
-            ].filter(user => 
+            ].filter(user =>
                 user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 user.gameId.toLowerCase().includes(searchQuery.toLowerCase())
             ));
@@ -27,8 +27,8 @@ export function SearchFriends() {
         }, 500);
     };
 
-    const handleSendRequest = (userId: string, userName: string) => {
-        dispatch(sendFriendRequest({ receiverId: userId, receiverName: userName }));
+    const handleSendRequest = (userId: string) => {
+        dispatch(sendFriendRequest({ receiverId: userId }));
         // Clear search after sending request
         setSearchQuery("");
         setSearchResults([]);
@@ -72,7 +72,7 @@ export function SearchFriends() {
                                 </div>
                             </div>
                             <button
-                                onClick={() => handleSendRequest(user.gameId, user.name)}
+                                onClick={() => handleSendRequest(user.gameId)}
                                 className="px-4 py-2 bg-[#3456e4] text-white rounded-lg font-semibold hover:bg-[#4666f6] transition-all duration-300 hover:scale-105"
                             >
                                 Add Friend
