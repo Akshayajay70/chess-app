@@ -1,7 +1,7 @@
-import { IFriendsRepo } from "../application/ports/interfaces/friends-repo";
-import { FriendsModel } from "./friends.model";
-import { ReturnData, FriendsProps, DBReturnData, PendingReqOutput } from "../application/ports/types";
-import { DatabaseError } from "../domain/errors/database.error";
+import { IFriendsRepo } from "../application/ports/interfaces/friends-repo.ts";
+import { FriendsModel } from "./friends.model.ts";
+import { ReturnData, FriendsProps, DBReturnData, PendingReqOutput } from "../application/ports/types/index.ts";
+import { DatabaseError } from "../domain/errors/database.error.ts";
 
 export class FriendsRepo implements IFriendsRepo {
     async createFriendRequest(data: FriendsProps): Promise<boolean> {

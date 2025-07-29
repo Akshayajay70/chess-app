@@ -1,7 +1,6 @@
-import { ICacheFriendHelper } from "@/application/helper/cache-friend-helper";
-import { ICacheService } from "@/application/ports/interfaces/cache-service";
-import { DBReturnData } from "@/application/ports/types/db-return.interface";
-import { FriendRequestResult } from "@/application/ports/types/friend-req-result.interface";
+import { ICacheFriendHelper } from "../../../application/helper/cache-friend-helper.ts";
+import { ICacheService } from "../../../application/ports/interfaces/cache-service.ts";
+import { DBReturnData, FriendOuput } from "../../../application/ports/types/index.ts";
 
 export class CacheFriendHelper implements ICacheFriendHelper{
     constructor(
@@ -76,7 +75,7 @@ export class CacheFriendHelper implements ICacheFriendHelper{
         }
     }
 
-    handleExistingStatus(status: string): FriendRequestResult {
+    handleExistingStatus(status: string): FriendOuput {
         return {
             success: false,
             message: status === 'blocked' ? 'User blocked' : `Friend request is ${status}`

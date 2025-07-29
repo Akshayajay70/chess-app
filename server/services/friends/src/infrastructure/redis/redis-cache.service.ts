@@ -1,4 +1,4 @@
-import { ICacheService } from '@/application/ports/interfaces/cache-service';
+import { ICacheService } from '../../application/ports/interfaces/cache-service.ts';
 import { createClient } from 'redis';
 
 

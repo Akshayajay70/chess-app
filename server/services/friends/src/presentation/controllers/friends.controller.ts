@@ -1,4 +1,4 @@
-import { ICreateFriendReqUseCase, IGetConnectionsUseCase, IGetPendingRequestsUseCase, IRemoveFriendUseCase, IUpdateFriendUseCase, IUpdateRequestUseCase } from "@/application/ports/interfaces/use-case.interface";
+import { ICreateFriendReqUseCase, IGetConnectionsUseCase, IGetPendingRequestsUseCase, IRemoveFriendUseCase, IUpdateFriendUseCase, IUpdateRequestUseCase } from "../../application/ports/interfaces/use-case.interface.ts";
 import { Request, Response, NextFunction } from "express";
 
 export class FriendsController {

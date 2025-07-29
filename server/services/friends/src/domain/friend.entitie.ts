@@ -1,4 +1,4 @@
-import { Name, GameId, Status } from "./value-objects/index.vo";
+import { Name, GameId, Status } from "./value-objects/index.vo.ts";
 
 export class Friends {
     private constructor(

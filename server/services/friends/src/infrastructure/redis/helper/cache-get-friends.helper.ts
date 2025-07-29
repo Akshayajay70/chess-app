@@ -1,6 +1,6 @@
-import { IGetFriendsHelper } from "@/application/helper/cache-get-friends-helper";
-import { ICacheService } from "@/application/ports/interfaces/cache-service";
-import { CacheGetFriend } from "@/application/helper/cache-get-friends-helper";
+import { IGetFriendsHelper } from "../../../application/helper/cache-get-friends-helper.ts";
+import { ICacheService } from "../../../application/ports/interfaces/cache-service.ts";
+import { CacheGetFriend } from "../../../application/helper/cache-get-friends-helper.ts";
 
 
 export class GetFriendsHelper implements IGetFriendsHelper {

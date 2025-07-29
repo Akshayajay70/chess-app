@@ -1,8 +1,8 @@
-import { UseCaseError } from "../../domain/errors/use-case.error";
-import { ICacheFriendHelper } from "../helper/cache-friend-helper";
-import { IGetFriendsHelper } from "../helper/cache-get-friends-helper";
-import { IFriendsRepo } from "../ports/interfaces/friends-repo";
-import { IUpdateFriendUseCase } from "../ports/interfaces/use-case.interface";
+import { UseCaseError } from "../../domain/errors/use-case.error.ts";
+import { ICacheFriendHelper } from "../helper/cache-friend-helper.ts";
+import { IGetFriendsHelper } from "../helper/cache-get-friends-helper.ts";
+import { IFriendsRepo } from "../ports/interfaces/friends-repo.ts";
+import { IUpdateFriendUseCase } from "../ports/interfaces/use-case.interface.ts";
 
 export class UpdateFriendUseCase implements IUpdateFriendUseCase{
     constructor(

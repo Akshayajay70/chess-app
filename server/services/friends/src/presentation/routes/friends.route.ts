@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { FriendsController } from "../controllers/friends.controller";
+import { FriendsController } from "../controllers/friends.controller.ts";
 
 export function createFriendsRoute(friendsController: FriendsController): Router {
     const router = Router();

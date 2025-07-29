@@ -8,7 +8,7 @@ import { verifyToken } from './verifyToken.js';
 config();
 
 const app = express();
-const PORT = 8000;
+const PORT = Number(process.env.PORT);
 const URL = process.env.FRONTEND_URL;
 
 app.use(cors({
@@ -21,33 +21,33 @@ app.use(cors({
 app.use(morgan('combined'));
 
 app.use('/user', verifyToken('user'), createProxyMiddleware({
-    target: 'http://localhost:8001/user',
+    target: `${process.env.USER_SERVICE_URL}/user`,
     changeOrigin: true
 }));
 
 app.use('/auth', createProxyMiddleware({
-    target: 'http://localhost:8001/auth',
+    target: `${process.env.USER_SERVICE_URL}/auth`,
     changeOrigin: true,
     pathRewrite: { '^/auth': '/auth' },
 }));
 
 app.use('/admin/login', createProxyMiddleware({
-    target: 'http://localhost:8002/admin/login',
+    target: `${process.env.ADMIN_SERVICE_URL}/admin/login`,
     changeOrigin: true
 }));
 
 app.use('/admin', verifyToken('admin'), createProxyMiddleware({
-    target: 'http://localhost:8002/admin',
+    target: `${process.env.ADMIN_SERVICE_URL}/admin`,
     changeOrigin: true
 }));
 
 app.use('/rating', verifyToken('user'), createProxyMiddleware({
-    target: 'http://localhost:8005/rating',
+    target: `${process.env.RATING_SERVICE_URL}/rating`,
     changeOrigin: true
 }));
 
 app.use('/friends', verifyToken('user'), createProxyMiddleware({
-    target: 'http://localhost:8006/friends',
+    target: `${process.env.FRIENDS_SERVICE_URL}/friends`,
     changeOrigin: true
 }));
 
