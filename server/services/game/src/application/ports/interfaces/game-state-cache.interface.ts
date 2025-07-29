@@ -1,7 +1,8 @@
-import { GameStateResponse } from "../types/index.ts";
+import { IMove } from "../types/index.ts";
 
 export interface IGameStateCache {
-    setGameState(matchRoomId: string, state: GameStateResponse): Promise<void>;
-    getGameState(matchRoomId: string): Promise<GameStateResponse | null>;
-    deleteGameState(matchRoomId: string): Promise<void>;
+    addMove(matchRoomId: string, move: IMove): Promise<boolean>;
+    undoMove(matchRoomId: string): Promise<IMove | null>;
+    getMoves(matchRoomId: string): Promise<IMove[]>;
+    deleteGame(matchRoomId: string): Promise<boolean>;
 } 

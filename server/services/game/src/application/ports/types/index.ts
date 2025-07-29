@@ -55,51 +55,29 @@ export type MatchFindResponse = {
     variant: VariantType
 }
 
-export type MoveGameRequest = {
+export type AddMoveRequest = {
     matchRoomId: string;
     move: IMove;
-    player: IPlayer;
-};
-
-export type MoveGameResponse = {
-    success: boolean;
-    message?: string;
-    newState?: GameStateResponse;
 };
 
 export type EndGameRequest = {
     matchRoomId: string;
     result: GameResultType;
     endType: EndType;
-    winner?: IPlayer;
-    loser?: IPlayer;
-    moves: IMove[];
 };
 
-export type EndGameResponse = {
-    success: boolean;
-    message?: string;
-    finalState?: GameStateResponse;
-};
-
-export type GetGameStateRequest = {
+export type SaveGameInput = {
     matchRoomId: string;
-};
+    result: GameResultType;
+    endType: EndType;
+    moves: IMove[]
+}
 
 export type GameStateResponse = {
     matchRoomId: string;
     players: [IPlayer, IPlayer];
     moves: IMove[];
     variant: VariantType;
-    status: 'ongoing' | 'ended';
     result?: GameResultType;
     endType?: EndType;
-};
-
-export type JoinGameRequest = {
-    matchRoomId: string;
-};
-
-export type JoinGameResponse = {
-    success: boolean;
 };

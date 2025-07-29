@@ -1,14 +1,12 @@
 import { UseCaseError } from "../../domain/errors/use-case.error.ts";
 import { IGameRepo } from "../ports/interfaces/game.repository.interface.ts";
 import { ICreateGame } from "../ports/interfaces/use-case.interface.ts";
-import { GameStateResponse, MatchFindRequest, MatchFindResponse } from "../ports/types/index.ts";
+import { MatchFindRequest, MatchFindResponse } from "../ports/types/index.ts";
 import { GameId, Rating, Variant } from "../../domain/value-objects/index.ts";
-import { IGameStateCache } from "../ports/interfaces/game-state-cache.interface.ts";
 
 export class CreateGameUseCase implements ICreateGame {
     constructor(
         private readonly gameRepo: IGameRepo,
-        private readonly cache: IGameStateCache
     ) { };
 
     async execute(input: MatchFindRequest): Promise<MatchFindResponse> {
@@ -32,14 +30,6 @@ export class CreateGameUseCase implements ICreateGame {
                 variant
             });
             console.log(response);
-            const initialState: GameStateResponse = {
-                matchRoomId: response.matchRoomId,
-                players: [response.whitePlayer, response.blackPlayer],
-                moves: [],
-                variant: response.variant,
-                status: 'ongoing'
-            };
-            await this.cache.setGameState(response.matchRoomId, initialState);
             return response;
 
         } catch (error) {

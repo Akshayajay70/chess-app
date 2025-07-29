@@ -12,5 +12,5 @@ export const moveValidator = yup.object({
     isCheckmate: yup.boolean().required(),
     clockBefore: yup.number().required(),
     clockAfter: yup.number().required(),
-    promotion: yup.string().oneOf(PromotionPiece).nullable()
+    promotion: yup.string().oneOf(PromotionPiece).nullable().default(null)
 });

@@ -1,31 +1,40 @@
 import { IEndGame } from '../ports/interfaces/use-case.interface.ts';
 import { IGameStateCache } from '../ports/interfaces/game-state-cache.interface.ts';
 import { IGameRepo } from '../ports/interfaces/game.repository.interface.ts';
-import { EndGameRequest, EndGameResponse, GameStateResponse } from '../ports/types/index.ts';
+import { EndGameRequest, GameStateResponse, SaveGameInput } from '../ports/types/index.ts';
+import { UseCaseError } from '../../domain/errors/use-case.error.ts';
 
 export class EndGameUseCase implements IEndGame {
     constructor(
         private readonly cache: IGameStateCache,
         private readonly gameRepo: IGameRepo
-    ) {}
+    ) { }
 
-    async execute(input: EndGameRequest): Promise<EndGameResponse> {
-        // Get current game state from cache
-        const state = await this.cache.getGameState(input.matchRoomId);
-        if (!state || state.status !== 'ongoing') {
-            return { success: false, message: 'Game not found or already ended' };
+    async execute(input: EndGameRequest): Promise<GameStateResponse | null> {
+        try {
+            const moves = await this.cache.getMoves(input.matchRoomId);
+
+            const finalState: SaveGameInput = {
+                matchRoomId: input.matchRoomId,
+                result: input.result,
+                endType: input.endType,
+                moves: moves
+            }
+
+            await this.gameRepo.saveFinalState(finalState);
+            await this.cache.deleteGame(input.matchRoomId);
+
+            return await this.gameRepo.find(input.matchRoomId);
+
+        } catch (error) {
+            throw new UseCaseError(
+                error instanceof Error
+                    ? error.message
+                    : "Failed to end game",
+                error instanceof Error
+                    ? error
+                    : new Error('Unknown error')
+            );
         }
-        // Mark game as ended
-        const finalState: GameStateResponse = {
-            ...state,
-            status: 'ended',
-            result: input.result,
-            endType: input.endType
-        };
-        // Persist to DB
-        await this.gameRepo.saveFinalState(finalState);
-        // Remove from cache
-        await this.cache.deleteGameState(input.matchRoomId);
-        return { success: true, finalState };
     }
 } 

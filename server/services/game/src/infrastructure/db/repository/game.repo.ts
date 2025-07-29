@@ -1,4 +1,4 @@
-import { GameStateResponse, MatchFindRequest, MatchFindResponse } from "../../../application/ports/types/index.ts";
+import { GameStateResponse, MatchFindRequest, MatchFindResponse, SaveGameInput } from "../../../application/ports/types/index.ts";
 import { IGameRepo } from "../../../application/ports/interfaces/game.repository.interface.ts";
 import { GameModel } from "../models/game.model.ts";
 import { DatabaseError } from "../../../domain/errors/database.error.ts";
@@ -40,7 +40,7 @@ export class GameRepo implements IGameRepo {
         }
     }
 
-    async saveFinalState(input: GameStateResponse): Promise<void> {
+    async saveFinalState(input: SaveGameInput): Promise<void> {
         try {
             await GameModel.updateOne(
                 { _id: input.matchRoomId },
@@ -82,7 +82,6 @@ export class GameRepo implements IGameRepo {
             ],
             moves: game.moves,
             variant: game.varientName,
-            status: game.result ? 'ended': 'ongoing',
             result: game.result ?? undefined,
             endType: game.endType
         };

@@ -28,11 +28,11 @@ const gameSocketController = new GameSocketController(moveGame, endGame, getGame
 
 const app = express();
 const server = createServer(app);
-const { port: PORT } = config;
+const { PORT } = config;
 
 const io = new Server(server, {
     cors: {
-        origin: [config.frontendUrl, "http://localhost:5173", "http://localhost:3000", "http://localhost:4173"],
+        origin: [config.frontendUrl],
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"]
@@ -54,8 +54,17 @@ io.on('connection', (socket) => {
 });
 
 async function start() {
-    await connectDB();
-    server.listen(PORT, () => console.log(`🚀 Game service running at http://localhost:${PORT}`));
+    try {
+        await connectDB();
+        server.listen(PORT, () => console.log(`🚀 Game service running at http://localhost:${PORT}`));
+    } catch (error) {
+        console.error(
+            'Server starting failed',
+            error instanceof Error
+                ? error.message
+                : 'Failed to start server'
+        )
+    }
 }
 
 start();

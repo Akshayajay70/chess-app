@@ -7,7 +7,17 @@ export class RedisCacheService implements ICacheService {
 
     constructor() {
         this.client = createClient();
-        this.client.connect().catch(console.error);
+
+        this.client.connect()
+            .then(() => console.log("✅ Redis connected successfully"))
+            .catch((err) =>
+                console.error(
+                    "❌ Error connecting to Redis:",
+                    err instanceof Error
+                        ? err.message
+                        : "Failed to connect to Redis"
+                )
+            );
     }
 
     async get(key: string): Promise<string | null> {
