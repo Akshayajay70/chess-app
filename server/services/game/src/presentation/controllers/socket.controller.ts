@@ -15,10 +15,9 @@ export class GameSocketController {
     handleConnection(socket: Socket) {
         console.log(socket.id);
 
-        // Make move and broadcast to opponent
         socket.on('make_move', async (data, callback) => {
+            console.log('make_move_data', data)
             try {
-                console.log('make_move_data', data)
                 const result = await this.addMove.execute(data);
 
                 socket.to(data.matchRoomId).emit('opponent_move', result);
@@ -58,6 +57,5 @@ export class GameSocketController {
                 );
             }
         });
-
     }
 } 

@@ -18,5 +18,5 @@ export const moveSchema = new Schema<IMove>({
         default: null
     },
 }, {
-    timestamps: true
+    _id: false
 });
