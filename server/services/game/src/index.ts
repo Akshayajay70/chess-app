@@ -4,10 +4,12 @@ import { Server } from 'socket.io';
 import { config } from './config/index.ts';
 
 import { CreateGameUseCase } from './application/use-cases/create-game.uc.ts';
+import { JoinMatchUseCase } from './application/use-cases/join-match.uc.ts'
 import { AddMoveUseCase } from './application/use-cases/add-move.uc.ts'
 import { EndGameUseCase } from './application/use-cases/end-game.uc.ts';
 import { GetGameStateUseCase } from './application/use-cases/get-game-state.uc.ts';
 import { UndoMoveUseCase } from './application/use-cases/undo-move.uc.ts';
+import { GetMovesUseCase } from './application/use-cases/get-moves.uc.ts'
 
 import { connectDB } from './infrastructure/db/connection/connection.ts';
 import { GameStateCacheRedis } from './infrastructure/service/game-state-cache.redis.ts';
@@ -33,12 +35,17 @@ const addMove = new AddMoveUseCase(cache);
 const endGame = new EndGameUseCase(cache, gameRepo);
 const getGameState = new GetGameStateUseCase(gameRepo);
 const undoMove = new UndoMoveUseCase(cache);
+const joinMatch = new JoinMatchUseCase(gameRepo);
+const getMoves = new GetMovesUseCase(cache);
 
 // controllers
 const gameSocketController = new GameSocketController(
+    joinMatch,
     addMove,
     endGame,
-    undoMove
+    undoMove,
+    getGameState,
+    getMoves
 );
 
 const gameController = new GameController(

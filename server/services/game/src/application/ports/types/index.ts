@@ -81,3 +81,8 @@ export type GameStateResponse = {
     result?: GameResultType;
     endType?: EndType;
 };
+
+export type JoinMatchResponse = { 
+    success: boolean, 
+    message?: string 
+}
